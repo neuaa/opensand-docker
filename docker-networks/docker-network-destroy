@@ -1,0 +1,14 @@
+#!/bin/bash
+
+simulation_id=$1
+
+docker network rm opensand-network-${simulation_id}
+docker network rm opensand-gw-network-${simulation_id}
+docker network rm lan-gw1-${simulation_id}
+docker network rm lan-gw2-${simulation_id}
+docker network rm lan-st1-${simulation_id}
+docker network rm lan-st2-${simulation_id}
+docker network rm lan-st3-${simulation_id}
+docker network rm lan-st4-${simulation_id}
+docker network rm lan-st5-${simulation_id}
+

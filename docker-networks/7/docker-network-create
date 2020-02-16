@@ -1,0 +1,19 @@
+#!/bin/bash
+
+docker network rm opensand-network
+docker network rm opensand-gw-network
+docker network rm lan1
+docker network rm lan2
+docker network rm lan3
+docker network rm lan4
+docker network rm lan5
+docker network rm lan6
+docker network create --driver=bridge --subnet=192.168.10.0/24 --gateway=192.168.10.1 --ipv6 --subnet=2001:660:6602:0101::/64  opensand-network
+docker network create --driver=bridge --subnet=192.168.20.0/24 --gateway=192.168.20.1 --ipv6 --subnet=2001:660:6602:0102::/64 lan1
+docker network create --driver=bridge --subnet=192.168.30.0/24 --gateway=192.168.30.1 --ipv6 --subnet=2001:660:6602:0103::/64 lan2
+docker network create --driver=bridge --subnet=192.168.40.0/24 --gateway=192.168.40.1  --ipv6 --subnet=2001:660:6602:0104::/64 lan3
+docker network create --driver=bridge --subnet=192.168.50.0/24 --gateway=192.168.50.1  --ipv6 --subnet=2001:660:6602:0105::/64 lan4
+docker network create --driver=bridge --subnet=192.168.60.0/24 --gateway=192.168.60.1  --ipv6 --subnet=2001:660:6602:0106::/64 lan5
+docker network create --driver=bridge --subnet=192.168.70.0/24 --gateway=192.168.70.1  --ipv6 --subnet=2001:660:6602:0107::/64 lan6
+docker network create --driver=bridge --subnet=1.2.3.0/24 opensand-gw-network
+ 

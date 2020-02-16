@@ -1,0 +1,267 @@
+#!/bin/bash
+
+command=$1
+
+if [ "$command" = "-h" ]; then
+	
+	# help printing for opensand-docker command
+        cat /home/neuaa/ProjetLong/simulation/opensand-docker/help 
+
+elif [ "$command" = "--simulate" ]; then
+
+	#default parameters if not precised by user
+
+	delay=125
+	fbw=50
+	rbw=20
+	ns=1	
+	nb_gw=1
+	nb_sgw=0
+	nb_clients=1
+	nb_st=1
+	service="http"
+	value_parameter=0
+
+        #number of parameters given when launching the orchestrator     
+        nb_parameters=($#-1)
+
+        #initialize indexes for parameters. nb_entities corresponds to the number associated with a given parameter (entity)
+        #index_name_parameter=4
+        #index_value_entities=5
+        for ((i=2;i<=$nb_parameters;i+=2)); do
+
+                string_name_parameter='$'${i}
+                eval name_parameter="${string_name_parameter}"
+
+		index_value_parameter=$((i+1))
+        	string_value_parameter='$'${index_value_parameter}
+        	eval value_parameter="$string_value_parameter"
+		
+		echo "${name_parameter}"
+		echo "${value_parameter}"            
+		# if and elif corresponds to known entities. It's fine !
+		if [[ $name_parameter = "-i" || $name_parameter = "--id" ]]; then
+				simulation_id=$value_parameter
+		
+                elif [[ $name_parameter = "-c" || $name_parameter = "--client" ]]; then
+                                nb_clients=$value_parameter
+				if [ $nb_clients -gt 10 ]; then
+                                	echo "More than 10 clients satellite terminals is not possible"
+                                	exit
+				fi
+                
+		elif [[ $name_parameter = "-st" || $name_parameter = "--satellite-terminal" ]] ; then
+				nb_st=$value_parameter
+                
+		elif [[ $name_parameter = "-gw" || $name_parameter = "--gateway" ]] ; then
+				nb_gw=$value_parameter
+                
+		elif [[ $name_parameter = "-sgw" || $name_parameter = "--split-gateway" ]] ; then
+				nb_sgw=$value_parameter
+                
+		elif [[ $name_parameter = "-s" || $name_parameter = "--services" ]] ; then
+				service=$value_parameter
+
+                elif [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
+				delay=$value_parameter
+                
+		elif [[ $name_parameter = "-fbw" || $name_parameter = "--forward-bandwidth" ]]; then
+				fbw=$value_parameter
+                
+		elif [[ $name_parameter = "-rbw" || $name_parameter = "--return-bandwidth" ]]; then
+				rbw=$value_paramter
+                
+		elif [[ $name_parameter = "-ns" || $name_parameter = "--number-spot" ]]; then
+				ns=$value_parameter
+
+
+
+                # a parameter / an entity not existing. please refer to the help with the following command : opensand-docker -h
+                else
+                        echo Parameter does not exist
+                        exit
+                fi
+       done 
+
+	sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf 
+
+	sudo sed -i 's+$delay+'${delay}'+g' /usr/share/opensand/core_global.conf 
+
+	sudo sed -i 's+$forward_bandwidth+'${fbw}'+g' /usr/share/opensand/core_global.conf 	
+
+        sudo sed -i 's+$return_bandwidth+'${rbw}'+g' /usr/share/opensand/core_global.conf 
+
+	
+        
+	#sudo sed -i 's+$+'${ns}'+g' /usr/share/opensand
+
+
+	#generate a simulation ID
+	echo "==== ${simulation_id} ====" >> output
+	
+	#launch sand-manager		
+	sand-manager -i &
+
+	manager_id=1
+	echo "- sand-manager - ${manager_id}" >> output
+	echo "- SAT_INTERFACE: 192.168.1${simulation_id}.1" >> output 
+
+	sleep 5
+		
+	# docker networks creation for Opensand : opensand-network, opensand-gw-network, lan1, lan2 ...
+	/home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-create ${simulation_id} 
+	
+	sleep 5
+	# First launching the collector for log
+	
+	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/collector/configuration.sh ${simulation_id} &
+	collector_id=2	
+
+	sleep 5
+	
+	# Launching satellite 
+	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/SAT/configuration.sh ${simulation_id} &
+        sat_id=3 
+	
+	sleep 5
+
+
+	created_gw=0
+        while [ ${created_gw} -ne $nb_gw ]
+        do
+        	created_gw=$((created_gw+1))
+
+                sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/GW/GW${created_gw}/configuration.sh ${simulation_id} &
+                                    	
+		gw_id=$((sat_id+created_gw))
+					
+		sleep 5 
+	done
+			
+		
+	# deploy split gateway(s)
+	
+	created_sgw=0
+        while [ ${created_sgw} -ne $nb_sgw ]
+        do
+
+        	created_sgw=$((created_sgw+1))
+
+		/home/neuaa/ProjetLong/simulation/opensand-docker/entites/SGW/SGW${created_gw}/GW-PHY/configuration.sh ${simulation_id} &
+		sleep 5
+					
+		/home/neuaa/ProjetLong/simulation/opensand-docker/entites/SGW/SGW${created_gw}/GW-NET-ACC/configuration.sh ${simulation_id} &
+
+	        gw_id=$((sat_id+created_sgw))
+
+		sleep 5
+         done
+
+	
+	# deploy satellite terminal(s)
+	created_st=0
+	st_string='ST'
+	while [ ${created_st} -ne $nb_st ]
+        do
+        	created_st=$((created_st+1))
+		index_st=$created_st
+                name_st="${st_string}${index_st}"
+                sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/${name_st}/configuration.sh ${simulation_id} &			
+                st_id=$((gw_id+index_st))
+		sleep 5
+	done
+
+			
+		
+	# deploy clients
+	total_created_gw=$(($created_gw+$created_sgw))
+	for ((i=1;i<=$total_created_gw;i++))
+        do
+           for ((j=1;j<=$nb_clients;j++))
+           do
+           	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
+           	sleep 5
+           done
+	done
+	last_ws=$((2+created_st))
+	#index_ws=$((created_gw+1))
+	for ((i=3;i<=$last_ws;i++))
+	do
+        	for ((j=1;j<=$nb_clients;j++))
+               	do
+                	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
+                        sleep 5
+                done
+	done
+
+elif [ "$command" = "--list-simulation" ]; then
+	cat ./output
+
+elif [ "$command" = "--simulation-change" ]; then
+
+        #default parameters if not precised by user
+	
+        delay=125
+        fbw=50
+        rbw=20
+        ns=1
+
+	
+        nb_parameters=($#-1)
+        for ((i=2;i<=$nb_parameters;i+=2)); do
+
+                string_name_parameter='$'${i}
+                eval name_parameter="${string_name_parameter}"
+
+                index_value_parameter=$((i+1))
+                string_value_parameter='$'${index_value_parameter}
+                eval value_parameter="$string_value_parameter"
+
+                echo "${name_parameter}"
+                echo "${value_parameter}"
+
+                if [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
+                                delay=$value_parameter
+
+                elif [[ $name_parameter = "-fbw" || $name_parameter = "--forward-bandwidth" ]]; then
+                                fbw=$value_parameter
+
+                elif [[ $name_parameter = "-rbw" || $name_parameter = "--return-bandwidth" ]]; then
+                                rbw=$value_paramter
+
+                elif [[ $name_parameter = "-ns" || $name_parameter = "--number-spot" ]]; then
+                                ns=$value_parameter
+
+		fi
+		            
+	done
+	
+	sudo nc localhost 5656 < ./stop.txt
+	sleep 2 	
+	sudo nc localhost 5656 < ./exit.txt
+
+        sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf
+	
+        sudo sed -i 's+$delay+'${delay}'+g' /usr/share/opensand/core_global.conf
+
+        sudo sed -i 's+$forward_bandwidth+'${fbw}'+g' /usr/share/opensand/core_global.conf
+
+        sudo sed -i 's+$return_bandwidth+'${rbw}'+g' /usr/share/opensand/core_global.conf
+
+	sudo cp /usr/share/opensand/core_global.conf /root/.opensand/default
+	
+	sudo nc localhost 5656 < ./start.txt
+	sleep 2
+	sudo nc localhost 5656 < ./exit.txt
+
+
+elif [ "$command" = "--destroy" ]; then
+	sudo docker stop $(docker ps -aq)
+	sudo docker rm $(docker ps -aq)
+	pgrep avahi| xargs kill
+	
+	simulation_id=$3
+	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-destroy ${simulation_id}
+else
+	echo Command not found
+fi

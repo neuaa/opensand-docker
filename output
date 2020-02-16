@@ -1,0 +1,440 @@
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.12.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.12.20
+  - LAN_INTERFACE: 192.168.22.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.12.40
+  - LAN_INTERFACE: 192.168.42.40
+==== 2 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.12.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.12.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.12.20
+  - LAN_INTERFACE: 192.168.22.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.12.40
+  - LAN_INTERFACE: 192.168.42.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.12.10
+==== 5 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.15.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.15.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.15.20
+  - LAN_INTERFACE: 192.168.25.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.15.40
+  - LAN_INTERFACE: 192.168.45.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.15.10
+==== 5 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.15.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.15.11
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.15.10
+==== 5 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.15.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.15.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.15.20
+  - LAN_INTERFACE: 192.168.25.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.15.40
+  - LAN_INTERFACE: 192.168.45.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.15.10
+==== 4 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.14.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.14.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.14.20
+  - LAN_INTERFACE: 192.168.24.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.14.40
+  - LAN_INTERFACE: 192.168.44.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.14.10
+==== 4 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.14.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.14.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.14.20
+  - LAN_INTERFACE: 192.168.24.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.14.40
+  - LAN_INTERFACE: 192.168.44.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.14.10
+==== 4 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.14.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.14.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.14.20
+  - LAN_INTERFACE: 192.168.24.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.14.40
+  - LAN_INTERFACE: 192.168.44.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.14.10
+==== 0 ====
+- sand-manager - 1
+- SAT_INTERFACE: 192.168.10.1
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
