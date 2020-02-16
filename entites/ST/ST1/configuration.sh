@@ -9,7 +9,7 @@ opensand_docker_path=./../../..
 
 
 #sudo cp /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/ST1/daemonbck.conf /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/ST1/daemonbck${simulation_id}.conf
-sudo cp $PWD/entites/ST/ST1/daemonbck.conf daemonbck${simulation_id}.conf
+sudo cp $PWD/entites/ST/ST1/daemonbck.conf $PWD/entites/ST/ST1/daemonbck${simulation_id}.conf
 
 #sudo sed -i 's+$emu_ipv4+'${st_sat_addr}'/24+g' /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/ST1/daemonbck${simulation_id}.conf
 sudo sed -i 's+$emu_ipv4+'${st_sat_addr}'/24+g' $PWD/entites/ST/ST1/daemonbck${simulation_id}.conf
