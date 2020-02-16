@@ -42,3 +42,8 @@
 - satellite terminal 1 - 6
   - SAT_INTERFACE: 192.168.10.40
   - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
