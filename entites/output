@@ -1,9 +1,0 @@
-==== 2 ====
-- sand-manager - 1
-- SAT_INTERFACE: 192.168.12.1
-
-
---------------------------------
-
-- satellite - 3
-  - SAT_INTERFACE: 192.168.12.10
