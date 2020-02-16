@@ -6,11 +6,11 @@ addr_ipv4=192.168.1${simulation_id}.11
 output_path=./../../output
 
 collector_id=2
-echo >> $output_path #output
-echo "--------------------------------" >> $output_path #/home/neuaa/ProjetLong/simulation/opensand-docker/output
-echo >> $output_path #/home/neuaa/ProjetLong/simulation/opensand-docker/output
-echo "- collector - ${collector_id}" >> $output_path #/home/neuaa/ProjetLong/simulation/opensand-docker/output
-echo "  - SAT_INTERFACE: ${addr_ipv4}" >> $output_path #/home/neuaa/ProjetLong/simulation/opensand-docker/output
+echo >> $PWD/output #output
+echo "--------------------------------" >> $PWD/output #/home/neuaa/ProjetLong/simulation/opensand-docker/output
+echo >> $PWD/output #/home/neuaa/ProjetLong/simulation/opensand-docker/output
+echo "- collector - ${collector_id}" >> $PWD/output #/home/neuaa/ProjetLong/simulation/opensand-docker/output
+echo "  - SAT_INTERFACE: ${addr_ipv4}" >> $PWD/output #/home/neuaa/ProjetLong/simulation/opensand-docker/output
 
 
 

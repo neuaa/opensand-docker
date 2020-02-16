@@ -20,9 +20,9 @@ sudo sed -i 's+$lan_ipv4+'${gw_lan_addr}'/24+g' $PWD/entites/GW/GW1/daemonbck${s
 sudo sed -i 's+$lan_ipv6+'${gw_lan_ipv6_addr}'/64+g' $PWD/entites/GW/GW1/daemonbck${simulation_id}.conf
 
 gw_id=4
-echo >> $opensand_docker_path/output
+echo >> $PWD/output
 echo "--------------------------------" >> $PWD/output
-echo >> $opensand_docker_path/output
+echo >> $PWD/output
 echo "- satellite gateway 1 - ${gw_id}" >> $PWD/output
 echo "  - SAT_INTERFACE: ${gw_sat_addr}" >> $PWD/output
 echo "  - LAN_INTERFACE: ${gw_lan_addr}" >> $PWD/output
