@@ -109,19 +109,21 @@ elif [ "$command" = "--simulate" ]; then
 	sleep 5
 		
 	# docker networks creation for Opensand : opensand-network, opensand-gw-network, lan1, lan2 ...
-	/home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-create ${simulation_id} 
-	
+	#/home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-create ${simulation_id} 
+	sudo ./docker-networks/docker-network-create ${simulation_id}
 	sleep 5
 	# First launching the collector for log
 	
-	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/collector/configuration.sh ${simulation_id} &
+	#sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/collector/configuration.sh ${simulation_id} &
+	./entites/collector/configuration.sh ${simulation_id} &
 	collector_id=2	
-
+	
 	sleep 5
 	
 	# Launching satellite 
-	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/SAT/configuration.sh ${simulation_id} &
-        sat_id=3 
+	#sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/SAT/configuration.sh ${simulation_id} &
+        sudo ./entites/SAT/configuration.sh ${simulation_id} &
+	sat_id=3 
 	
 	sleep 5
 
@@ -131,8 +133,8 @@ elif [ "$command" = "--simulate" ]; then
         do
         	created_gw=$((created_gw+1))
 
-                sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/GW/GW${created_gw}/configuration.sh ${simulation_id} &
-                                    	
+                #sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/GW/GW${created_gw}/configuration.sh ${simulation_id} &
+                sudo ./entites/GW/GW${created_gw}/configuration.sh ${simulation_id} &                    	
 		gw_id=$((sat_id+created_gw))
 					
 		sleep 5 
@@ -147,11 +149,12 @@ elif [ "$command" = "--simulate" ]; then
 
         	created_sgw=$((created_sgw+1))
 
-		/home/neuaa/ProjetLong/simulation/opensand-docker/entites/SGW/SGW${created_gw}/GW-PHY/configuration.sh ${simulation_id} &
+		#/home/neuaa/ProjetLong/simulation/opensand-docker/entites/SGW/SGW${created_gw}/GW-PHY/configuration.sh ${simulation_id} &
+		./entites/SGW/SGW${created_gw}/GW-PHY/configuration.sh ${simulation_id} &
 		sleep 5
 					
-		/home/neuaa/ProjetLong/simulation/opensand-docker/entites/SGW/SGW${created_gw}/GW-NET-ACC/configuration.sh ${simulation_id} &
-
+		#/home/neuaa/ProjetLong/simulation/opensand-docker/entites/SGW/SGW${created_gw}/GW-NET-ACC/configuration.sh ${simulation_id} &
+		./entites/SGW/SGW${created_gw}/GW-NET-ACC/configuration.sh ${simulation_id} &
 	        gw_id=$((sat_id+created_sgw))
 
 		sleep 5
@@ -166,8 +169,9 @@ elif [ "$command" = "--simulate" ]; then
         	created_st=$((created_st+1))
 		index_st=$created_st
                 name_st="${st_string}${index_st}"
-                sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/${name_st}/configuration.sh ${simulation_id} &			
-                st_id=$((gw_id+index_st))
+                #sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/${name_st}/configuration.sh ${simulation_id} &			
+                ./entites/ST/${name_st}/configuration.sh ${simulation_id} &
+		st_id=$((gw_id+index_st))
 		sleep 5
 	done
 
@@ -179,7 +183,8 @@ elif [ "$command" = "--simulate" ]; then
         do
            for ((j=1;j<=$nb_clients;j++))
            do
-           	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
+           	#sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
+		sudo ./entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
            	sleep 5
            done
 	done
@@ -189,8 +194,9 @@ elif [ "$command" = "--simulate" ]; then
 	do
         	for ((j=1;j<=$nb_clients;j++))
                	do
-                	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
-                        sleep 5
+                	#sudo /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
+                        ./entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
+			sleep 5
                 done
 	done
 
@@ -261,7 +267,8 @@ elif [ "$command" = "--destroy" ]; then
 	pgrep avahi| xargs kill
 	
 	simulation_id=$3
-	sudo /home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-destroy ${simulation_id}
+	sudo ./docker-networks/docker-network-destroy ${simulation_id}
+	#sudo /home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-destroy ${simulation_id}
 else
 	echo Command not found
 fi
