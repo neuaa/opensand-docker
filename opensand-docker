@@ -10,7 +10,7 @@ if [ "$command" = "-h" ]; then
 elif [ "$command" = "--simulate" ]; then
 
 	#default parameters if not precised by user
-
+	simulation_id=0
 	delay=125
 	fbw=50
 	rbw=20
@@ -236,9 +236,9 @@ elif [ "$command" = "--simulation-change" ]; then
 		            
 	done
 	
-	sudo nc localhost 5656 < ./stop.txt
+	sudo nc localhost 5656 < ./nc_commands/stop.txt
 	sleep 2 	
-	sudo nc localhost 5656 < ./exit.txt
+	sudo nc localhost 5656 < ./nc_commands/exit.txt
 
         sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf
 	
@@ -250,9 +250,9 @@ elif [ "$command" = "--simulation-change" ]; then
 
 	sudo cp /usr/share/opensand/core_global.conf /root/.opensand/default
 	
-	sudo nc localhost 5656 < ./start.txt
+	sudo nc localhost 5656 < ./nc_commands/start.txt
 	sleep 2
-	sudo nc localhost 5656 < ./exit.txt
+	sudo nc localhost 5656 < ./nc_commands/exit.txt
 
 
 elif [ "$command" = "--destroy" ]; then
