@@ -1,7 +1,5 @@
 # opensand-docker
 
-This file explains how to use the project opensand-docker.
-
 **opensand-docker is a container-based tool that allows deploying an emulated satellite architecture into Docker containers.**
 
 As the name of the projet suggests, it uses OpenSAND, an open source emulator developped by CNES (National Centre for Space Studies), Thales Alenia Space and Vivéris Technologies companies. For more informations, https://opensand.org/content/home.php
