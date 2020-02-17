@@ -3,7 +3,6 @@
 simulation_id=$1
 addr_ipv4=192.168.1${simulation_id}.11
 
-output_path=./../../output
 
 collector_id=2
 echo >> $PWD/output #output

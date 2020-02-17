@@ -5,7 +5,7 @@ command=$1
 if [ "$command" = "-h" ]; then
 	
 	# help printing for opensand-docker command
-        cat /home/neuaa/ProjetLong/simulation/opensand-docker/help 
+        cat $PWD/help 
 
 elif [ "$command" = "--simulate" ]; then
 
