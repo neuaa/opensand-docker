@@ -15,7 +15,7 @@ elif [ "$command" = "--simulate" ]; then
 	fbw=50
 	rbw=20
 	ns=1	
-	nb_gw=1
+e	nb_gw=1
 	nb_sgw=0
 	nb_clients=1
 	nb_st=1
@@ -34,8 +34,6 @@ elif [ "$command" = "--simulate" ]; then
         	string_value_parameter='$'${index_value_parameter}
         	eval value_parameter="$string_value_parameter"
 		
-		echo "${name_parameter}"
-		echo "${value_parameter}"            
 		# if and elif corresponds to known entities. It's fine !
 		if [[ $name_parameter = "-i" || $name_parameter = "--id" ]]; then
 				simulation_id=$value_parameter
@@ -215,8 +213,6 @@ elif [ "$command" = "--simulation-change" ]; then
                 string_value_parameter='$'${index_value_parameter}
                 eval value_parameter="$string_value_parameter"
 
-                echo "${name_parameter}"
-                echo "${value_parameter}"
 
                 if [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
                                 delay=$value_parameter

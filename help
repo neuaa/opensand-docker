@@ -24,18 +24,13 @@ gateway, the services could be of type "http", service is separated by a coma
 
 ## Channel Parameters
 
--alt, --altitude <delay>
-satellite orbit
--p, --params <list_of_parameters>
-simulation, they will be specified
-specify the delay associated to the
-specify the list of parameters of the
+-d, --delay <count> specify the delay of the simulation 
+-fbw, --forward-bandwidth <count> specify the forward bandwidth of the simulation
+-rbw, --return-bandwidth <count> psecify the return bandwidth of the simulation
 
 ## Change a running simulation
 
---simulation-change <ID> <params>
-Modify a running simulation specifying the
-ID of the simulation and the parameters
+--simulation-change <params> Modify a running simulation specifying the parameters and the new values
 
 ## List of the parameters
 
