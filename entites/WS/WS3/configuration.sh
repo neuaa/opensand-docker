@@ -17,7 +17,7 @@ sudo cp $PWD/entites/WS/configuration_routes.sh $PWD/entites/WS/WS3/configuratio
 sudo sed -i 's+$addr_gateway+'${addr_gateway}'+g' $PWD/entites/WS/WS3/configuration_routes_${simulation_id}
 
 
-docker create -it --net lan-st1-${simulation_id} --ip $addr_ipv4 --ip6 $addr_ipv6 --privileged --hostname ws-st1-${index_workstation}-${simulation_id} --name ws-st1-${index_workstation}-${simulation_id} -v $PWD/entites/WS/WS3/configuration_routes_${simulation_id}:/configuration_routes opensand-ws
+docker create -it --net lan-st1-${simulation_id} --ip $addr_ipv4 --ip6 $addr_ipv6 --privileged --hostname ws-st1-${index_workstation}-${simulation_id} --name ws-st1-${index_workstation}-${simulation_id} -v $PWD/entites/WS/WS3/configuration_routes_${simulation_id}:/configuration_routes opensand-ws-2
 docker start ws-st1-${index_workstation}-${simulation_id}
 docker exec ws-st1-${index_workstation}-${simulation_id} "/configuration_routes"
 
