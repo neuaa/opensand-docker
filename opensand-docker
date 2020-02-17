@@ -25,9 +25,6 @@ elif [ "$command" = "--simulate" ]; then
         #number of parameters given when launching the orchestrator     
         nb_parameters=($#-1)
 
-        #initialize indexes for parameters. nb_entities corresponds to the number associated with a given parameter (entity)
-        #index_name_parameter=4
-        #index_value_entities=5
         for ((i=2;i<=$nb_parameters;i+=2)); do
 
                 string_name_parameter='$'${i}
@@ -107,7 +104,11 @@ elif [ "$command" = "--simulate" ]; then
 	echo "- SAT_INTERFACE: 192.168.1${simulation_id}.1" >> output 
 
 	sleep 5
-		
+	
+
+	# docker images creation for Opensand : opensand-daemon, opensand-collector and opensand-ws	
+	sudo ./Dockerfiles/docker-image-create
+	
 	# docker networks creation for Opensand : opensand-network, opensand-gw-network, lan1, lan2 ...
 	sudo ./docker-networks/docker-network-create ${simulation_id}
 	sleep 5
