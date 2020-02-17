@@ -13,7 +13,8 @@ echo "  - SAT_INTERFACE: ${addr_ipv4}" >> $PWD/output #/home/neuaa/ProjetLong/si
 
 
 
-docker create -it --privileged --net opensand-network-${simulation_id} --hostname collector-${simulation_id} --name collector-${simulation_id} --ip $addr_ipv4 opensand-collector
+docker create -it --privileged --net opensand-network-${simulation_id} --hostname collector-${simulation_id} --name collector-${simulation_id} --ip $addr_ipv4 opensand-collector-2
 docker start collector-${simulation_id}
-docker exec collector-${simulation_id} "/script"
+docker exec collector-${simulation_id} "/start-collector.sh"
+
 
