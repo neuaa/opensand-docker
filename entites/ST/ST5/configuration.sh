@@ -29,8 +29,8 @@ echo "  - LAN_INTERFACE: ${st_lan_addr}" >> $PWD/output
 
 
 
-docker create -it --privileged -v $PWD/entites/ST/ST5/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $st_sat_addr --hostname st5-${simulation_id} --name st5-${simulation_id} opensand-daemon
+docker create -it --privileged -v $PWD/entites/ST/ST5/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $st_sat_addr --hostname st5-${simulation_id} --name st5-${simulation_id} opensand-daemon-2
 docker network connect --ip $st_lan_addr --ip6 ${st_lan_ipv6_addr} lan-st5-${simulation_id} st5-${simulation_id}
 docker start st5-${simulation_id}
-docker exec st5-${simulation_id} "/script"
+docker exec st5-${simulation_id} "/start-daemon.sh"
 

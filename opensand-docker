@@ -265,7 +265,7 @@ elif [ "$command" = "--destroy" ]; then
 	sudo docker stop $(docker ps -aq)
 	sudo docker rm $(docker ps -aq)
 	pgrep avahi| xargs kill
-	
+		
 	simulation_id=$3
 	sudo ./docker-networks/docker-network-destroy ${simulation_id}
 	#sudo /home/neuaa/ProjetLong/simulation/opensand-docker/docker-networks/docker-network-destroy ${simulation_id}

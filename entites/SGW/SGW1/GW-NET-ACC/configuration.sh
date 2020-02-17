@@ -29,8 +29,8 @@ echo "  - INTERCO_INTERFACE: ${sgw_interco_addr}" >> $PWD/output
 echo "  - LAN_INTERFACE: ${sgw_lan_addr}" >> $PWD/output
 
 
-docker create -it --privileged -v $PWD/entites/SGW/SGW1/GW-NET-ACC/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $sgw_sat_addr --hostname gw1-net-acc-${simulation_id} --name gw1-net-acc-${simulation_id} opensand-daemon
+docker create -it --privileged -v $PWD/entites/SGW/SGW1/GW-NET-ACC/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $sgw_sat_addr --hostname gw1-net-acc-${simulation_id} --name gw1-net-acc-${simulation_id} opensand-daemon-2
 docker network connect --ip $sgw_lan_addr lan-gw1-${simulation_id} gw1-net-acc-${simulation_id}
 docker network connect --ip $sgw_interco_addr opensand-gw-network-${simulation_id} gw1-net-acc-${simulation_id}
 docker start gw1-net-acc-${simulation_id}
-docker exec gw1-net-acc-${simulation_id} "/script"
+docker exec gw1-net-acc-${simulation_id} "/start-daemon.sh"

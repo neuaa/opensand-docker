@@ -28,9 +28,9 @@ echo "  - SAT_INTERFACE: ${gw_sat_addr}" >> $PWD/output
 echo "  - LAN_INTERFACE: ${gw_lan_addr}" >> $PWD/output
 
 
-docker create -it --privileged -v $PWD/entites/GW/GW1/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $gw_sat_addr  --hostname gw1-${simulation_id} --name gw1-${simulation_id} opensand-daemon
+docker create -it --privileged -v $PWD/entites/GW/GW1/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $gw_sat_addr  --hostname gw1-${simulation_id} --name gw1-${simulation_id} opensand-daemon-2
 docker network connect --ip $gw_lan_addr --ip6 $gw_lan_ipv6_addr lan-gw1-${simulation_id} gw1-${simulation_id}
 docker start gw1-${simulation_id}
-docker exec gw1-${simulation_id} "/script"
+docker exec gw1-${simulation_id} "/start-daemon.sh"
 
 
