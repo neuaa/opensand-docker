@@ -19,11 +19,11 @@ Here are some commands to deploy the architecture :
   
 **Deploy a more detailed architecture**, here with 1 gateway, 3 satellite terminals and 2 clients in each local network
   
-    ./opensand-docker -i 2 -gw 1 -st 3 -c 2 
+    ./opensand-docker --simulate -i 2 -gw 1 -st 3 -c 2 
   
 **More generally :**
 
-    ./opensand-docker -i $simulation_id -gw $nb_gw -st $nb_st -c $nb_clients
+    ./opensand-docker --simulate -i $simulation_id -gw $nb_gw -st $nb_st -c $nb_clients
     
   Note that you cannot deploy :
   
@@ -34,9 +34,9 @@ Here are some commands to deploy the architecture :
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.   
   
   
-  **Remove the architecture with simulation id equal to 0** (i correspond to the id of the simulation, by default 0) : 
+  **Remove the architecture with simulation id equal to $simulation_id** (i correspond to the id of the simulation, by default 0) : 
  
-    ./opensand-docker --destroy -i 0
+    ./opensand-docker --destroy -i $simulation_id
     
    
   
