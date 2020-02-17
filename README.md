@@ -26,8 +26,11 @@ Here are some commands to deploy the architecture :
 ./opensand-docker -i $simulation_id -gw $nb_gw -st $nb_st -c $nb_clients
     
   Note that you cannot deploy :
+  
     - more than 2 gateways
+  
     - more than 5 satellite terminals
+    
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.   
   
   
