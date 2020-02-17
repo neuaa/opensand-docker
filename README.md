@@ -10,7 +10,7 @@ Here are some commands to deploy the architecture :
 
 **Print the help :**
 
-./opensand-docker -h 
+    ./opensand-docker -h 
   
  **Deploy a simple architecture.** Note that it indirectly create opensand docker images and networks, recquired for the deployment.
  The simple architecture includes a collector, a satellite, a satellite terminal and a client in each local network in each terrestrial entity (GW and ST)
