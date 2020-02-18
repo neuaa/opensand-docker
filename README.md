@@ -61,5 +61,7 @@ Note that default route is configured as its associated LAN_GW.
  
     ./opensand-docker --destroy -i $simulation_id
     
+ **A recommended practise is to exit the manager GUI after deleting the architecture**
+    
    
   
