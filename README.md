@@ -36,16 +36,27 @@ Here are some commands to deploy the architecture :
     - more than 5 satellite terminals
     
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.   
-    
+
+**Use sand-manager GUI to start a simulation**
+
+**While simulation running, you can modify some parameters by**
+        
+        - using the GUI interface (the simulation must be previously stopped)
+        OR
+        - using the following command : ./opensand-docker --simulation-change -d 150 -fbw 100
+        This command will set the delay to 150ms (by default 125ms) and the forward bandwidth to 100MHz (by default 50MHz)
+
 **Running containers are listed with :**
 
         docker ps 
         
-**Access to a running client with following command **
+**Access to a running client with following command**
  
         docker exec -it ws-$LAN_GW-$client_id-$simulation_id
-        Note that default route is configured as its associated LAN_GW.
-  
+        
+Note that default route is configured as its associated LAN_GW.
+
+
   **Remove the architecture with simulation id equal to $simulation_id** (i correspond to the id of the simulation, by default 0) : 
  
     ./opensand-docker --destroy -i $simulation_id
