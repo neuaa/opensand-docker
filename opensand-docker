@@ -77,7 +77,8 @@ elif [ "$command" = "--simulate" ]; then
                         exit
                 fi
        done 
-
+	
+	# set physical parameters for simulation
 	sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf 
 
 	sudo sed -i 's+$delay+'${delay}'+g' /usr/share/opensand/core_global.conf 
@@ -88,7 +89,6 @@ elif [ "$command" = "--simulate" ]; then
 
 	
         
-	#sudo sed -i 's+$+'${ns}'+g' /usr/share/opensand
 
 
 	#generate a simulation ID
@@ -111,8 +111,8 @@ elif [ "$command" = "--simulate" ]; then
 	# docker networks creation for Opensand : opensand-network, opensand-gw-network, lan1, lan2 ...
 	sudo ./docker-networks/docker-network-create ${simulation_id}
 	sleep 5
+
 	# First launching the collector for log
-	
 	./entites/collector/configuration.sh ${simulation_id} &
 	collector_id=2	
 	
@@ -124,7 +124,7 @@ elif [ "$command" = "--simulate" ]; then
 	
 	sleep 5
 
-
+	# Launching gateway(s)
 	created_gw=0
         while [ ${created_gw} -ne $nb_gw ]
         do
@@ -138,7 +138,6 @@ elif [ "$command" = "--simulate" ]; then
 			
 		
 	# deploy split gateway(s)
-	
 	created_sgw=0
         while [ ${created_sgw} -ne $nb_sgw ]
         do
@@ -191,9 +190,11 @@ elif [ "$command" = "--simulate" ]; then
                 done
 	done
 
+# current simulation
 elif [ "$command" = "--list-simulation" ]; then
 	cat ./output
 
+#changing simulation parameters
 elif [ "$command" = "--simulation-change" ]; then
 
         #default parameters if not precised by user
@@ -231,6 +232,7 @@ elif [ "$command" = "--simulation-change" ]; then
 		            
 	done
 	
+	#connect to the manager in order to stop the running simulation and modify parameters
 	sudo nc localhost 5656 < ./nc_commands/stop.txt
 	sleep 4 	
 	sudo nc localhost 5656 < ./nc_commands/exit.txt
@@ -250,6 +252,7 @@ elif [ "$command" = "--simulation-change" ]; then
 	sudo nc localhost 5656 < ./nc_commands/exit.txt
 
 
+# remove the current architecture
 elif [ "$command" = "--destroy" ]; then
 	sudo docker stop $(docker ps -aq)
 	sudo docker rm $(docker ps -aq)
@@ -261,6 +264,8 @@ elif [ "$command" = "--destroy" ]; then
 	fi
 	sudo ./docker-networks/docker-network-destroy ${simulation_id}
 	rm output
+
+
 else
 	echo Command not found
 fi
