@@ -9,11 +9,9 @@ addr_gateway=192.168.6${simulation_id}.60
 
 
 
-#sudo cp /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/configuration_routes.sh /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS5/configuration_routes_${simulation_id}
 sudo cp $PWD/entites/WS/configuration_routes.sh $PWD/entites/WS/WS5/configuration_routes_${simulation_id}
 
 
-#sudo sed -i 's+$addr_gateway+'${addr_gateway}'+g' /home/neuaa/ProjetLong/simulation/opensand-docker/entites/WS/WS5/configuration_routes_${simulation_id}
 sudo sed -i 's+$addr_gateway+'${addr_gateway}'+g' $PWD/entites/WS/WS5/configuration_routes_${simulation_id}
 
 

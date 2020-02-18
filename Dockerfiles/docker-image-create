@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t opensand-daemon-2 $PWD/Dockerfiles/opensand-daemon-2/.
-docker build -t opensand-collector-2 $PWD/Dockerfiles/opensand-collector-2/.
-docker build -t opensand-ws-2 $PWD/Dockerfiles/opensand-collector-2/.
+docker build -t opensand-daemon $PWD/Dockerfiles/opensand-daemon/.
+docker build -t opensand-collector $PWD/Dockerfiles/opensand-collector/.
+docker build -t opensand-ws $PWD/Dockerfiles/opensand-collector/.
