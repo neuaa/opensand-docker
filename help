@@ -31,15 +31,3 @@ gateway, the services could be of type "http", service is separated by a coma
 ## Change a running simulation
 
 --simulation-change <params> Modify a running simulation specifying the parameters and the new values
-
-## List of the parameters
-
--a, --add <ELEMENT>
-Add an element to the simulation, the
-element could be of type : satellite-terminal, gateway, client or http
--r, --remove <ELEMENT> <ID>
-Remove the element specified with its ID
-from the simulation
--p, --params
-Specify the parameters of the simulation to
-change
