@@ -4,9 +4,10 @@
 
 As the name of the projet suggests, it uses OpenSAND, an open source emulator developped by CNES (National Centre for Space Studies), Thales Alenia Space and Vivéris Technologies companies. For more informations, https://opensand.org/content/home.php
 
-Here are packages requirements for using the tool locally :
+Here are the requirements for using the tool locally :
 
-        docker packages
+        ubuntu 16.04 OS
+        docker packages (please refer to the official documentation https://docs.docker.com/install/linux/docker-ce/ubuntu/)
         opensand-manager (please refer to the official documentation for installing opensand-manager https://opensand.org/content/get.php) 
 
 Here are some commands to deploy the architecture :
