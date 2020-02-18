@@ -36,7 +36,15 @@ Here are some commands to deploy the architecture :
     - more than 5 satellite terminals
     
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.   
-  
+    
+**Running containers are listed with :**
+
+        docker ps 
+        
+**Access to a running client with following command **
+ 
+        docker exec -it ws-$LAN_GW-$client_id-$simulation_id
+        Note that default route is configured as its associated LAN_GW.
   
   **Remove the architecture with simulation id equal to $simulation_id** (i correspond to the id of the simulation, by default 0) : 
  
