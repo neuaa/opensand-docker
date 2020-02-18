@@ -6,7 +6,7 @@ As the name of the projet suggests, it uses OpenSAND, an open source emulator de
 
 Here are the requirements for using the tool locally :
 
-        ubuntu 16.04 OS (if not, use a virtual machine to launch the manager)
+        ubuntu 16.04 xenial OS (if not, use a xenial ubuntu VM to launch the manager)
         docker packages (please refer to the official documentation https://docs.docker.com/install/linux/docker-ce/ubuntu/)
         opensand-manager (please refer to the official documentation for installing opensand-manager https://opensand.org/content/get.php) 
 
