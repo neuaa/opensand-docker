@@ -57,7 +57,7 @@ Here are some commands to deploy the architecture :
 Note that default route is configured as its associated LAN_GW.
 
 
-  **Remove the architecture with simulation id equal to $simulation_id** (i correspond to the id of the simulation, by default 0) : 
+  **Remove the architecture with simulation id equal to $simulation_id** (i correspond to the id of the simulation, by default 0 if not precised) : 
  
     ./opensand-docker --destroy -i $simulation_id
     
