@@ -10,6 +10,3 @@ RUN apt-get install -y netcat
 RUN apt-get install -y software-properties-common
 COPY start-daemon.sh /start-daemon.sh 
 RUN chmod +x /start-daemon.sh
-EXPOSE 3141
-EXPOSE 5926
-EXPOSE 5358

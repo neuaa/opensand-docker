@@ -17,9 +17,9 @@ sudo sed -i 's+$lan_ipv6+'${st_lan_ipv6_addr}'/64+g' $PWD/entites/ST/ST1/daemonb
 
 
 st_id=6
-echo >> $opensand_docker_path/output
+echo >> $PWD/output
 echo "--------------------------------" >> $PWD/output
-echo >> $opensand_docker_path/output
+echo >> $PWD/output
 echo "- satellite terminal 1 - ${st_id}" >> $PWD/output
 echo "  - SAT_INTERFACE: ${st_sat_addr}" >> $PWD/output
 echo "  - LAN_INTERFACE: ${st_lan_addr}" >> $PWD/output

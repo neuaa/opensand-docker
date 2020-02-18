@@ -92,6 +92,7 @@ elif [ "$command" = "--simulate" ]; then
 
 
 	#generate a simulation ID
+	echo "" >> output
 	echo "==== ${simulation_id} ====" >> output
 	
 	#launch sand-manager		
@@ -253,9 +254,13 @@ elif [ "$command" = "--destroy" ]; then
 	sudo docker stop $(docker ps -aq)
 	sudo docker rm $(docker ps -aq)
 	pgrep avahi| xargs kill
-		
-	simulation_id=$3
+	simulation_id=0
+        nb_parameters=($#-1)
+	if [[ $nb_parameter -gt 0 ]]; then
+		simulation_id=$3
+	fi
 	sudo ./docker-networks/docker-network-destroy ${simulation_id}
+	rm output
 else
 	echo Command not found
 fi
