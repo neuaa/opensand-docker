@@ -52,7 +52,7 @@ Here are some commands to deploy the architecture :
         
 **Access to a running client with following command**
  
-        docker exec -it ws-$LAN_GW-$client_id-$simulation_id
+        docker exec -it ws-$LAN_GW-$client_id-$simulation_id (use docker ps command to know exactly the name of your clients containers)
         
 Note that default route is configured as its associated LAN_GW.
 
