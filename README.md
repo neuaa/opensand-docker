@@ -49,6 +49,10 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
         OR
         - using the following command : ./opensand-docker --simulation-change -d 150 -fbw 100
         This command will set the delay to 150ms (by default 125ms) and the forward bandwidth to 100MHz (by default 50MHz)
+        
+**Current simulation OpenSAND entities are listed with the following command :**
+         
+         ./opensand-docker --list-simulation
 
 **Running containers are listed with :**
 
