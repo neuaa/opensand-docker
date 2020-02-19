@@ -98,7 +98,7 @@ elif [ "$command" = "--simulate" ]; then
 	
 	#launch sand-manager		
 	sand-manager -i &
-
+	manager_ip_address=192.168.1${simulation_id}.1
 	manager_id=1
 	echo "- sand-manager - ${manager_id}" >> output
 	echo " - SAT_INTERFACE: 192.168.1${simulation_id}.1 (your Docker-host ip address in the opensand-network)" >> output 
@@ -201,7 +201,7 @@ elif [ "$command" = "--list-simulation" ]; then
 elif [ "$command" = "--simulation-change" ]; then
 
         #default parameters if not precised by user
-	
+	simulation_id=0	
         delay=125
         fbw=50
         rbw=20
@@ -218,8 +218,12 @@ elif [ "$command" = "--simulation-change" ]; then
                 string_value_parameter='$'${index_value_parameter}
                 eval value_parameter="$string_value_parameter"
 
-
-                if [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
+		if [[ $name_parameter = "-i" ]]; then
+				simulation_id=$value_parameter
+				
+		
+		
+                elif [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
                                 delay=$value_parameter
 
                 elif [[ $name_parameter = "-fbw" || $name_parameter = "--forward-bandwidth" ]]; then
@@ -236,9 +240,12 @@ elif [ "$command" = "--simulation-change" ]; then
 	done
 	
 	#connect to the manager in order to stop the running simulation and modify parameters
-	sudo nc localhost 5656 < ./nc_commands/stop.txt
+
+	manager_ip_address=192.168.1${simulation_id}.1	
+	echo ${manager_ip_address}
+	sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
 	sleep 4 	
-	sudo nc localhost 5656 < ./nc_commands/exit.txt
+	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
         sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf
 	
@@ -250,9 +257,9 @@ elif [ "$command" = "--simulation-change" ]; then
 
 	sudo cp /usr/share/opensand/core_global.conf /root/.opensand/default
 	
-	sudo nc localhost 5656 < ./nc_commands/start.txt
+	sudo nc ${manager_ip_address} 5656 < ./nc_commands/start.txt
 	sleep 4
-	sudo nc localhost 5656 < ./nc_commands/exit.txt
+	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
 
 # remove the current architecture
