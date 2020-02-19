@@ -14,7 +14,8 @@ elif [ "$command" = "--simulate" ]; then
 	delay=125
 	fbw=50
 	rbw=20
-	ns=1	
+	ns=1
+	sat_mode="transparent"	
 	nb_gw=1
 	nb_sgw=0
 	nb_clients=1
@@ -70,6 +71,8 @@ elif [ "$command" = "--simulate" ]; then
 		elif [[ $name_parameter = "-ns" || $name_parameter = "--number-spot" ]]; then
 				ns=$value_parameter
 
+#		 elif [[ $name_parameter = "-mode" || $name_parameter = "--satellite-mode" ]]; then
+#                                sat_mode=$value_parameter
 
 
                 # a parameter / an entity not existing. please refer to the help with the following command : opensand-docker -h
@@ -88,7 +91,7 @@ elif [ "$command" = "--simulate" ]; then
 
         sudo sed -i 's+$return_bandwidth+'${rbw}'+g' /usr/share/opensand/core_global.conf 
 
-	
+	sudo sed -i 's+$sat_mode+'${sat_mode}'+g' /usr/share/opensand/core_global.conf
         
 
 
@@ -206,7 +209,7 @@ elif [ "$command" = "--simulation-change" ]; then
         fbw=50
         rbw=20
         ns=1
-
+	sat_mode="transparent"
 	
         nb_parameters=($#-1)
         for ((i=2;i<=$nb_parameters;i+=2)); do
@@ -235,6 +238,12 @@ elif [ "$command" = "--simulation-change" ]; then
                 elif [[ $name_parameter = "-ns" || $name_parameter = "--number-spot" ]]; then
                                 ns=$value_parameter
 
+
+#                elif [[ $name_parameter = "-mode" || $name_parameter = "--satellite-mode" ]]; then
+#                                sat_mode=$value_parameter
+
+
+
 		fi
 		            
 	done
@@ -247,13 +256,17 @@ elif [ "$command" = "--simulation-change" ]; then
 	sleep 4 	
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
-        sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf
 	
-        sudo sed -i 's+$delay+'${delay}'+g' /usr/share/opensand/core_global.conf
+        sudo cp ./opensand_core_config/core_globalbck.conf /usr/share/opensand/core_global.conf
+
+	sudo sed -i 's+$delay+'${delay}'+g' /usr/share/opensand/core_global.conf
 
         sudo sed -i 's+$forward_bandwidth+'${fbw}'+g' /usr/share/opensand/core_global.conf
 
         sudo sed -i 's+$return_bandwidth+'${rbw}'+g' /usr/share/opensand/core_global.conf
+
+        sudo sed -i 's+$sat_mode+'${sat_mode}'+g' /usr/share/opensand/core_global.conf
+
 
 	sudo cp /usr/share/opensand/core_global.conf /root/.opensand/default
 	
