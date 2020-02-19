@@ -8,7 +8,8 @@ Here are the requirements for using the tool locally :
 
         ubuntu 16.04 xenial OS (if not, use a xenial ubuntu VM to launch the manager)
         docker packages (please refer to the official documentation https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-        opensand-manager (please refer to the official documentation for installing opensand-manager https://opensand.org/content/get.php) 
+        opensand-manager (please refer to the official documentation for installing opensand-manager https://opensand.org/content/get.php)
+        Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation.
 
 Here are some commands to deploy the architecture :
 
