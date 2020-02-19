@@ -18,7 +18,7 @@ gw_id=4
 echo >> $PWD/output
 echo "--------------------------------" >> $PWD/output
 echo >> $PWD/output
-echo "	- split satellite physical gateway 1 - ${gw_id}" >> $PWD/output
+echo "- split satellite physical gateway 1 - ${gw_id}" >> $PWD/output
 echo "  - SAT_INTERFACE: ${sgw_sat_ip}" >> $PWD/output
 echo "  - INTERCO_INTERFACE: ${sgw_interco_ip}" >> $PWD/output
 

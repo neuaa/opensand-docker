@@ -101,7 +101,7 @@ elif [ "$command" = "--simulate" ]; then
 
 	manager_id=1
 	echo "- sand-manager - ${manager_id}" >> output
-	echo "- SAT_INTERFACE: 192.168.1${simulation_id}.1" >> output 
+	echo " - SAT_INTERFACE: 192.168.1${simulation_id}.1 (your Docker-host ip address in the opensand-network)" >> output 
 
 	sleep 5
 	
@@ -266,7 +266,7 @@ elif [ "$command" = "--destroy" ]; then
 		simulation_id=$3
 	fi
 	sudo ./docker-networks/docker-network-destroy ${simulation_id}
-	rm output
+	echo > output
 
 
 else

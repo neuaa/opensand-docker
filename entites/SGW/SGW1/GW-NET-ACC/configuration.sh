@@ -19,7 +19,7 @@ gw_id=4
 echo >> $PWD/output
 echo "--------------------------------" >> $PWD/output
 echo >> $PWD/output
-echo "	- split satellite network access gateway 1 - ${gw_id}" >> $PWD/output
+echo "- split satellite network access gateway 1 - ${gw_id}" >> $PWD/output
 echo "  - SAT_INTERFACE: ${sgw_sat_addr}" >> $PWD/output
 echo "  - INTERCO_INTERFACE: ${sgw_interco_addr}" >> $PWD/output
 echo "  - LAN_INTERFACE: ${sgw_lan_addr}" >> $PWD/output
