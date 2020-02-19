@@ -79,7 +79,7 @@ elif [ "$command" = "--simulate" ]; then
        done 
 	
 	# set physical parameters for simulation
-	sudo cp /usr/share/opensand/core_globalbck.conf /usr/share/opensand/core_global.conf 
+	sudo cp ./opensand_core_config/core_globalbck.conf /usr/share/opensand/core_global.conf 
 
 	sudo sed -i 's+$delay+'${delay}'+g' /usr/share/opensand/core_global.conf 
 
