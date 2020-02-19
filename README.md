@@ -37,7 +37,7 @@ Here are some commands to deploy the architecture :
     
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.  
     
-OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for physical aspect and a related gateway for network access (https://wiki.net4sat.org/doku.php?id=opensand:emulated_satcom_features:system:split_gateway:index). **To Deploy a split gateway, just replace -gw by -sgw (you can still deploy until 2 split gateways)**
+OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for physical aspect and a related gateway for network access (For more details : https://wiki.net4sat.org/doku.php?id=opensand:emulated_satcom_features:system:split_gateway:index). **To Deploy a split gateway, just replace -gw by -sgw (you can still deploy until 2 split gateways)**
 
 **Use sand-manager GUI to start a simulation**
 
