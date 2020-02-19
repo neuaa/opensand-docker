@@ -15,9 +15,29 @@
 
 --------------------------------
 
-- satellite gateway 1 - 4
+	- split satellite physical gateway 1 - 4
   - SAT_INTERFACE: 192.168.10.20
+  - INTERCO_INTERFACE: 192.168.90.20
+
+--------------------------------
+
+	- split satellite network access gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.22
+  - INTERCO_INTERFACE: 192.168.90.22
   - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+	- split satellite physical gateway 2 - 5
+  - SAT_INTERFACE: 192.168.10.25
+  - INTERCO_INTERFACE: 192.168.90.25
+
+--------------------------------
+
+	- split satellite network access gateway 2 - 5
+  - SAT_INTERFACE: 192.168.10.27
+  - INTERCO_INTERFACE: 192.168.90.27
+  - LAN_INTERFACE: 192.168.30.20
 
 --------------------------------
 

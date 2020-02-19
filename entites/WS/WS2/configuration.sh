@@ -14,6 +14,6 @@ sudo cp $PWD/entites/WS/configuration_routes.sh $PWD/entites/WS/WS2/configuratio
 
 sudo sed -i 's+$addr_gateway+'${addr_gateway}'+g' $PWD/entites/WS/WS2/configuration_routes_${simulation_id}
 
-docker create -it --net lan-gw2-${simulation_id} --ip $addr_ipv4 --ip6 $addr_ipv6 --privileged --hostname ws-gw2-${index_workstation}-${simulation_id} --name ws-gw2-${index_workstation}-${simulation_id} -v $PWD/entites/WS/WS2/configuration_routes_${simulation_id}:/configuration_routes opensand-http-server
-docker start ws-gw2-${index_workstation}-${simulation_id}
-docker exec ws-gw2-${index_workstation}-${simulation_id} "/configuration_routes"
+docker create -it --net lan-gw2-${simulation_id} --ip $addr_ipv4 --ip6 $addr_ipv6 --privileged --hostname server-gw2-${index_workstation}-${simulation_id} --name server-gw2-${index_workstation}-${simulation_id} -v $PWD/entites/WS/WS2/configuration_routes_${simulation_id}:/configuration_routes opensand-http-server
+docker start server-gw2-${index_workstation}-${simulation_id}
+docker exec server-gw2-${index_workstation}-${simulation_id} "/configuration_routes"

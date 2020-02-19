@@ -18,6 +18,7 @@ elif [ "$command" = "--simulate" ]; then
 	nb_gw=1
 	nb_sgw=0
 	nb_clients=1
+	nb_servers=1
 	nb_st=1
 	service="http"
 	value_parameter=0
@@ -53,9 +54,9 @@ elif [ "$command" = "--simulate" ]; then
                 
 		elif [[ $name_parameter = "-sgw" || $name_parameter = "--split-gateway" ]] ; then
 				nb_sgw=$value_parameter
-                
+               			nb_gw=0 
 		elif [[ $name_parameter = "-s" || $name_parameter = "--services" ]] ; then
-				service=$value_parameter
+				nb_servers=$value_parameter
 
                 elif [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
 				delay=$value_parameter
@@ -144,10 +145,10 @@ elif [ "$command" = "--simulate" ]; then
 
         	created_sgw=$((created_sgw+1))
 
-		./entites/SGW/SGW${created_gw}/GW-PHY/configuration.sh ${simulation_id} &
+		./entites/SGW/SGW${created_sgw}/GW-PHY/configuration.sh ${simulation_id} &
 		sleep 5
 					
-		./entites/SGW/SGW${created_gw}/GW-NET-ACC/configuration.sh ${simulation_id} &
+		./entites/SGW/SGW${created_sgw}/GW-NET-ACC/configuration.sh ${simulation_id} &
 	        gw_id=$((sat_id+created_sgw))
 
 		sleep 5
@@ -169,16 +170,18 @@ elif [ "$command" = "--simulate" ]; then
 
 			
 		
-	# deploy clients
+	# deploy servers
 	total_created_gw=$(($created_gw+$created_sgw))
 	for ((i=1;i<=$total_created_gw;i++))
         do
-           for ((j=1;j<=$nb_clients;j++))
+           for ((j=1;j<=$nb_servers;j++))
            do
 		sudo ./entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
            	sleep 5
            done
 	done
+
+	# deploy clients
 	last_ws=$((2+created_st))
 	#index_ws=$((created_gw+1))
 	for ((i=3;i<=$last_ws;i++))
