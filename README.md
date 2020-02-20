@@ -11,7 +11,8 @@ Here are the requirements for using the tool locally :
         opensand-manager (please refer to the official documentation for installing opensand-manager https://opensand.org/content/get.php)
         Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation.
         First launching could be a little long (a few minutes) as you need to build opensand images.
-
+        Launch the orchestrator with the sudo rights
+        
 Here are some commands to deploy the architecture :
 
 **Print the help :**
@@ -44,6 +45,8 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
 **Use sand-manager GUI to start a simulation**
 
         sand-manager -i
+        
+ The orchestrator automatically launch sand-manager but there could be some problems with the GUI part. In case of problem, remove the GUI, kill the sand-manager (pkill sand-manager) process and re-try the sand-manager -i command.
 
 **While simulation running, you can modify some parameters by**
         
