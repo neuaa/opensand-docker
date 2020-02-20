@@ -4,13 +4,15 @@
 
 As the name of the projet suggests, it uses OpenSAND, an open source emulator developped by CNES (National Centre for Space Studies), Thales Alenia Space and Vivéris Technologies companies. For more informations, https://opensand.org/content/home.php
 
-Here are the requirements for using the tool locally :
+The orchestrator can be seen as a GUI server who communicates with running containers. Container are OpenSAND entites(collector, gateway, satellite terminals) or independant workstation (or server).
+
+Here are the requirements for using the orchestrator and starting containers :
 
         - ubuntu 16.04 or 18.04 (I personnaly advice using ubuntu 16.04). As OpenSAND can configure your local network configuration, using a virtual machine is preferred.
         
         -  docker packages (please refer to the official documentation https://docs.docker.com/install/linux/docker-ce/ubuntu/)
         
-        - opensand and opensand-manager packages (please refer to the official documentation https://opensand.org/content/get.php)
+        - opensand and opensand-manager packages (please refer to the official documentation https://opensand.org/content/get.php). Opensand-Manager will be required in order to start the emulation.
         
         - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation.
         
