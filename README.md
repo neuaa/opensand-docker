@@ -43,6 +43,8 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
 
 **Use sand-manager GUI to start a simulation**
 
+        sand-manager -i
+
 **While simulation running, you can modify some parameters by**
         
         - using the GUI interface (the simulation must be previously stopped)
