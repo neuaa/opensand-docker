@@ -106,7 +106,7 @@ elif [ "$command" = "--simulate" ]; then
 	echo "- sand-manager - ${manager_id}" >> output
 	echo " - SAT_INTERFACE: 192.168.1${simulation_id}.1 (your Docker-host ip address in the opensand-network)" >> output 
 
-	sleep 5
+	#sleep 5
 	
 
 	# docker images creation for Opensand : opensand-daemon, opensand-collector and opensand-ws	
@@ -114,19 +114,19 @@ elif [ "$command" = "--simulate" ]; then
 	
 	# docker networks creation for Opensand : opensand-network, opensand-gw-network, lan1, lan2 ...
 	sudo ./docker-networks/docker-network-create ${simulation_id}
-	sleep 5
+	#sleep 5
 
 	# First launching the collector for log
 	./entites/collector/configuration.sh ${simulation_id} &
 	collector_id=2	
 	
-	sleep 5
+	#sleep 5
 	
 	# Launching satellite 
         sudo ./entites/SAT/configuration.sh ${simulation_id} &
 	sat_id=3 
 	
-	sleep 5
+	#sleep 5
 
 	# Launching gateway(s)
 	created_gw=0
@@ -137,7 +137,7 @@ elif [ "$command" = "--simulate" ]; then
                 sudo ./entites/GW/GW${created_gw}/configuration.sh ${simulation_id} &                    	
 		gw_id=$((sat_id+created_gw))
 					
-		sleep 5 
+		#sleep 5 
 	done
 			
 		
@@ -149,12 +149,12 @@ elif [ "$command" = "--simulate" ]; then
         	created_sgw=$((created_sgw+1))
 
 		./entites/SGW/SGW${created_sgw}/GW-PHY/configuration.sh ${simulation_id} &
-		sleep 5
+		#sleep 5
 					
 		./entites/SGW/SGW${created_sgw}/GW-NET-ACC/configuration.sh ${simulation_id} &
 	        gw_id=$((sat_id+created_sgw))
 
-		sleep 5
+		#sleep 5
          done
 
 	
@@ -168,7 +168,7 @@ elif [ "$command" = "--simulate" ]; then
                 name_st="${st_string}${index_st}"
                 ./entites/ST/${name_st}/configuration.sh ${simulation_id} &
 		st_id=$((gw_id+index_st))
-		sleep 5
+		#sleep 5
 	done
 
 			
@@ -180,7 +180,7 @@ elif [ "$command" = "--simulate" ]; then
            for ((j=1;j<=$nb_servers;j++))
            do
 		sudo ./entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
-           	sleep 5
+           	#sleep 5
            done
 	done
 
@@ -192,7 +192,7 @@ elif [ "$command" = "--simulate" ]; then
         	for ((j=1;j<=$nb_clients;j++))
                	do
                         ./entites/WS/WS${i}/configuration.sh ${j} ${simulation_id} &
-			sleep 5
+			#sleep 5
                 done
 	done
 
@@ -253,7 +253,7 @@ elif [ "$command" = "--simulation-change" ]; then
 	manager_ip_address=192.168.1${simulation_id}.1	
 	echo ${manager_ip_address}
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
-	sleep 4 	
+	#sleep 4 	
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
 	
@@ -271,7 +271,7 @@ elif [ "$command" = "--simulation-change" ]; then
 	sudo cp /usr/share/opensand/core_global.conf /root/.opensand/default
 	
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/start.txt
-	sleep 4
+	#sleep 4
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
 
