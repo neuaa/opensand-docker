@@ -7,10 +7,15 @@ As the name of the projet suggests, it uses OpenSAND, an open source emulator de
 Here are the requirements for using the tool locally :
 
         ubuntu 16.04 or 18.04 (I personnaly advice using ubuntu 16.04). As OpenSAND can configure your local network configuration, using a virtual machine is preferred.
+        
         docker packages (please refer to the official documentation https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+        
         opensand and opensand-manager packages (please refer to the official documentation according https://opensand.org/content/get.php)
+        
         Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation.
+        
         First launching could be a little long (a few minutes) as you need to build opensand images.
+        
         Using the sudo rights
         
 Here are some commands to deploy the architecture :
