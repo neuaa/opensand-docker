@@ -10,7 +10,7 @@ Here are the requirements for using the tool locally :
         
         -  docker packages (please refer to the official documentation https://docs.docker.com/install/linux/docker-ce/ubuntu/)
         
-        - opensand and opensand-manager packages (please refer to the official documentation according https://opensand.org/content/get.php)
+        - opensand and opensand-manager packages (please refer to the official documentation https://opensand.org/content/get.php)
         
         - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation.
         
