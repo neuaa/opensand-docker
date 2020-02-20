@@ -11,7 +11,7 @@ Here are the requirements for using the tool locally :
         opensand-manager (please refer to the official documentation for installing opensand-manager https://opensand.org/content/get.php)
         Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation.
         First launching could be a little long (a few minutes) as you need to build opensand images.
-        Launch the orchestrator with the sudo rights
+        Using the sudo rights
         
 Here are some commands to deploy the architecture :
 
