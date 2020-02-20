@@ -9,4 +9,3 @@ RUN apt-get install -y netcat
 RUN apt-get install -y iperf3
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y apache2
-RUN apt-get install -y netstat

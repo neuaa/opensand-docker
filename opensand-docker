@@ -196,6 +196,7 @@ elif [ "$command" = "--simulate" ]; then
                 done
 	done
 
+
 # current simulation
 elif [ "$command" = "--list-simulation" ]; then
 	cat ./output
@@ -254,7 +255,7 @@ elif [ "$command" = "--simulation-change" ]; then
 	echo ${manager_ip_address}
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
 	#sleep 4 	
-	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
+	#sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
 	
         sudo cp ./opensand_core_config/core_globalbck.conf /usr/share/opensand/core_global.conf
@@ -269,9 +270,9 @@ elif [ "$command" = "--simulation-change" ]; then
 
 
 	sudo cp /usr/share/opensand/core_global.conf /root/.opensand/default
-	
+	sleep 2	
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/start.txt
-	#sleep 4
+	sleep 2
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
 

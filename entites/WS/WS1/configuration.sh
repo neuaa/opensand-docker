@@ -11,6 +11,12 @@ addr_ipv6=2001:660:6602:01${simulation_id}2::${last_byte}
 addr_gateway=192.168.2${simulation_id}.20
 
 
+#server_id=
+echo >> $PWD/output
+echo "--------------------------------" >> $PWD/output
+echo >> $PWD/output
+echo "- server" >> $PWD/output
+echo "  - LAN_INTERFACE: ${addr_ipv4}" >> $PWD/output
 
 sudo cp $PWD/entites/WS/configuration_routes.sh $PWD/entites/WS/WS1/configuration_routes_${simulation_id}
 
