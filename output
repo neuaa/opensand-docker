@@ -1,0 +1,61 @@
+
+
+==== 0 ====
+- sand-manager - 1
+ - SAT_INTERFACE: 192.168.10.1 (your Docker-host ip address in the opensand-network)
+
+--------------------------------
+
+- collector - 2
+  - SAT_INTERFACE: 192.168.10.11
+
+--------------------------------
+
+- server
+
+  - LAN_INTERFACE: 192.168.20.101
+--------------------------------
+
+- client
+  - LAN_INTERFACE: 192.168.30.101
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
+
+--------------------------------
+
+- satellite terminal 1 - 6
+  - SAT_INTERFACE: 192.168.10.40
+  - LAN_INTERFACE: 192.168.40.40
+
+--------------------------------
+
+- satellite terminal 3 - 8
+  - SAT_INTERFACE: 192.168.10.60
+  - LAN_INTERFACE: 192.168.60.60
+
+--------------------------------
+
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
+
+--------------------------------
+
+- satellite terminal 4 - 9
+  - SAT_INTERFACE: 192.168.10.70
+  - LAN_INTERFACE: 192.168.70.70
+
+--------------------------------
+
+- satellite gateway 2 - 5
+  - SAT_INTERFACE: 192.168.10.25
+  - LAN_INTERFACE: 192.168.30.20
+
+--------------------------------
+
+- satellite terminal 2 - 7
+  - SAT_INTERFACE: 192.168.10.50
+  - LAN_INTERFACE: 192.168.50.50
