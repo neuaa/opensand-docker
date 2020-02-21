@@ -194,11 +194,9 @@ elif [ "$command" = "--list-simulation" ]; then
 elif [ "$command" = "--simulation-change" ]; then
 
         #default parameters if not precised by user
-	simulation_id=0	
-        delay=125
-        fbw=50
-        rbw=20
-        spot_id=1
+	simulation_id=0
+	delay_to_change=0	
+	fbw_to_change=0
 	sat_mode="transparent"
 
 	created_gw=$(docker ps| grep opensand-daemon| grep gw| wc -l)
@@ -224,10 +222,12 @@ elif [ "$command" = "--simulation-change" ]; then
 				gw_id=$value_parameter	
 		
                 elif [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
-                                delay=$value_parameter
+                                delay_to_change=1
+				delay=$value_parameter
 
                 elif [[ $name_parameter = "-fbw" || $name_parameter = "--forward-bandwidth" ]]; then
-                                fbw=$value_parameter
+                                fbw_to_change=1
+				fbw=$value_parameter
 
                 elif [[ $name_parameter = "-rbw" || $name_parameter = "--return-bandwidth" ]]; then
                                 rbw=$value_paramter
@@ -248,11 +248,8 @@ elif [ "$command" = "--simulation-change" ]; then
 	#connect to the manager in order to stop the running simulation and modify parameters
 
 	manager_ip_address=192.168.1${simulation_id}.1	
-	echo ${manager_ip_address}
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
-	sleep 3
-	#sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
-
+	
 	#script test all entities are 0
 	daemon_running=0
 	while [[ $daemon_running -gt 0 ]]; do
@@ -261,48 +258,37 @@ elif [ "$command" = "--simulation-change" ]; then
 				calcul=$(docker exec -it gw${i}-${simulation_id} ps -ef | grep opensand |wc -l)
 				daemon_running=$((daemon_running+calcul))
 		done
-		for ((i=1;i<=$created_gw;i+=1)); do
+		for ((i=1;i<=$created_sgw;i+=1)); do
 				calcul=$(docker exec -it sgw${i}-${simulation_id} ps -ef | grep opensand |wc -l)
-                                daemon_running=$((daemon_running+1))
+                                daemon_running=$((daemon_running+calcul))
 		done
                 for ((i=1;i<=$created_st;i+=1)); do
 				calcul=$(docker exec -it st${i}-${simulation_id} ps -ef | grep opensand |wc -l)
-                                daemon_running=$((daemon_running+1))
+                                daemon_running=$((daemon_running+calcul))
 		done
 			        calcul=$(docker exec -it sat-${simulation_id} ps -ef | grep opensand |wc -l)
-				daemon_running=$((daemon_running+1))
+				daemon_running=$((daemon_running+calcul))
 	done
 	
 	
-
-	
-        #sudo cp ./opensand_core_config/core_globalbck.conf /usr/share/opensand/core_global.conf
-
-
-	sudo sed -i 's+<delay>.*</delay>+<delay>'${delay}'</delay>+g' /root/.opensand/default/core_global.conf
-
-
-	sed -i 's+<bandwidth>.*</bandwidth>+<bandwidth>100000</bandwidth>+1' /root/.opensand/default/core_global.conf
-	# Pour chaque GW
-		# Pour chaque spot
-		
-		#GW 0 spot 1
-		sudo sed -i '0,/<bandwidth>100000<\/bandwidth>/s//<bandwidth>'${fbw}'<\/bandwidth>/' /root/.opensand/default/core_global.conf
-		
-		#GW 0 spot 2
-		sudo sed -i '0,/<bandwidth>100000<\/bandwidth>/s//<bandwidth>'${fbw}'<\/bandwidth>/' /root/.opensand/default/core_global.conf
-       
-		#GW 6 spot 1
-
-		#GW 6 spot 2
-
+	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 	
 
-	# sudo sed -i 's+$forward_bandwidth+'${fbw}'+g' /usr/share/opensand/core_global.conf
+	if [[ $delay_to_change = 1 ]]; then
+		sudo sed -i 's+<delay>.*</delay>+<delay>'${delay}'</delay>+g' /root/.opensand/default/core_global.conf
+	fi
+		
+	
 
-       # sudo sed -i 's+$return_bandwidth+'${rbw}'+g' /usr/share/opensand/core_global.conf
 
-       # sudo sed -i 's+$sat_mode+'${sat_mode}'+g' /usr/share/opensand/core_global.conf
+	if [[ $fbw_to_change = 1 ]]; then
+		k=$((spot_id*gw_id))
+		n_line=$(cat /root/.opensand/default/core_global.conf |grep -n "<bandwidth*" |awk '{print $1}' FS=":" |head -n $k |tail -n 1)
+		sudo sed -i ''${n_line}'s/<bandwidth>.*<\/bandwidth>/<bandwidth>'${fbw}'<\/bandwidth>/' /root/.opensand/default/core_global.conf
+	fi
+ 
+
+	
 
 
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/start.txt
@@ -315,18 +301,17 @@ elif [ "$command" = "--simulation-change" ]; then
                                 calcul=$(docker exec -it gw${i}-${simulation_id} ps -ef | grep opensand |wc -l)
                                 daemon_running=$((daemon_running+calcul))
                 done
-                for ((i=1;i<=$created_gw;i+=1)); do
+                for ((i=1;i<=$created_sgw;i+=1)); do
                                 calcul=$(docker exec -it sgw${i}-${simulation_id} ps -ef | grep opensand |wc -l)
-                                daemon_running=$((daemon_running+1))
+                                daemon_running=$((daemon_running+calcul))
                 done
                 for ((i=1;i<=$created_st;i+=1)); do
                                 calcul=$(docker exec -it st${i}-${simulation_id} ps -ef | grep opensand |wc -l)
-                                daemon_running=$((daemon_running+1))
+                                daemon_running=$((daemon_running+calcul))
                 done
                                 calcul=$(docker exec -it sat-${simulation_id} ps -ef | grep opensand |wc -l)
-                                daemon_running=$((daemon_running+1))
+                                daemon_running=$((daemon_running+calcul))
         done
-
 
 	sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 

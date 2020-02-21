@@ -11,7 +11,7 @@ addr_gateway=192.168.3${simulation_id}.30
 echo >> $PWD/output
 echo "--------------------------------" >> $PWD/output
 echo >> $PWD/output
-echo "- client" >> $PWD/output
+echo "- server" >> $PWD/output
 echo "  - LAN_INTERFACE: ${addr_ipv4}" >> $PWD/output
 
 
