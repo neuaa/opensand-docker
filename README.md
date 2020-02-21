@@ -14,7 +14,7 @@ Here are the requirements for using the orchestrator and starting containers :
         
         - opensand and opensand-manager packages (please refer to the official documentation https://opensand.org/content/get.php). Opensand-Manager will be required in order to start the emulation.
         
-        - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the network emulation.
+        - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation network.
         
         - First launching could be a little long (a few minutes) as you need to build opensand images.
         
