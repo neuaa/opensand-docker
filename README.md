@@ -4,7 +4,7 @@
 
 As the name of the projet suggests, it uses OpenSAND, an open source emulator developped by CNES (National Centre for Space Studies), Thales Alenia Space and Vivéris Technologies companies. For more informations, https://opensand.org/content/home.php
 
-The orchestrator can be seen as a GUI server who communicates with running containers. Container are OpenSAND entites(collector, gateway, satellite terminals) or independant workstation (or server).
+The orchestrator can be seen as a GUI server who communicates with running containers. Both run on local machine. Container are OpenSAND entites(collector, gateway, satellite terminals) or independant workstations (or server).
 
 Here are the requirements for using the orchestrator and starting containers :
 
@@ -14,7 +14,7 @@ Here are the requirements for using the orchestrator and starting containers :
         
         - opensand and opensand-manager packages (please refer to the official documentation https://opensand.org/content/get.php). Opensand-Manager will be required in order to start the emulation.
         
-        - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation.
+        - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the network emulation.
         
         - First launching could be a little long (a few minutes) as you need to build opensand images.
         
