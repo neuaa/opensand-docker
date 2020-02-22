@@ -24,9 +24,9 @@ echo "  - INTERCO_INTERFACE: ${sgw_interco_ip}" >> $PWD/output
 
 
 
-docker create -it --privileged -v $PWD/entites/SGW/SGW1/GW-PHY/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $sgw_sat_ip --hostname gw1-phy-${simulation_id} --name gw1-phy-${simulation_id} opensand-daemon
-docker network connect --ip $sgw_interco_ip opensand-gw-network-${simulation_id} gw1-phy-${simulation_id}
-docker start gw1-phy-${simulation_id}
-docker exec gw1-phy-${simulation_id} "/start-daemon.sh"
+docker create -it --privileged -v $PWD/entites/SGW/SGW1/GW-PHY/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $sgw_sat_ip --hostname sgw1-phy-${simulation_id} --name sgw1-phy-${simulation_id} opensand-daemon
+docker network connect --ip $sgw_interco_ip opensand-gw-network-${simulation_id} sgw1-phy-${simulation_id}
+docker start sgw1-phy-${simulation_id}
+docker exec sgw1-phy-${simulation_id} "/start-daemon.sh"
 
 

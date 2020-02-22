@@ -19,7 +19,7 @@ echo "- split satellite physical gateway 2 - ${gw_id}" >> $PWD/output
 echo "  - SAT_INTERFACE: ${sgw_sat_ip}" >> $PWD/output
 echo "  - INTERCO_INTERFACE: ${sgw_interco_ip}" >> $PWD/output
 
-docker create -it --privileged -v $PWD/entites/SGW/SGW2/GW-PHY/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $sgw_sat_ip --hostname gw2-phy-${simulation_id} --name gw2-phy-${simulation_id} opensand-daemon
-docker network connect --ip $sgw_interco_ip opensand-gw-network-${simulation_id} gw2-phy-${simulation_id}
-docker start gw2-phy-${simulation_id}
-docker exec gw2-phy-${simulation_id} "/start-daemon.sh"
+docker create -it --privileged -v $PWD/entites/SGW/SGW2/GW-PHY/daemonbck${simulation_id}.conf:/etc/opensand/daemonbck.conf --net opensand-network-${simulation_id} --ip $sgw_sat_ip --hostname sgw2-phy-${simulation_id} --name sgw2-phy-${simulation_id} opensand-daemon
+docker network connect --ip $sgw_interco_ip opensand-gw-network-${simulation_id} sgw2-phy-${simulation_id}
+docker start sgw2-phy-${simulation_id}
+docker exec sgw2-phy-${simulation_id} "/start-daemon.sh"
