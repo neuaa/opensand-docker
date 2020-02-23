@@ -12,23 +12,12 @@
 --------------------------------
 
 - server
-  - LAN_INTERFACE: 192.168.20.101
-
---------------------------------
-
-- server
   - LAN_INTERFACE: 192.168.30.101
 
 --------------------------------
 
-- satellite - 3
-  - SAT_INTERFACE: 192.168.10.10
-
---------------------------------
-
-- split satellite physical gateway 1 - 4
-  - SAT_INTERFACE: 192.168.10.20
-  - INTERCO_INTERFACE: 192.168.90.20
+- server
+  - LAN_INTERFACE: 192.168.20.101
 
 --------------------------------
 
@@ -38,10 +27,14 @@
 
 --------------------------------
 
-- split satellite network access gateway 1 - 4
-  - SAT_INTERFACE: 192.168.10.22
-  - INTERCO_INTERFACE: 192.168.90.22
-  - LAN_INTERFACE: 192.168.20.20
+- split satellite physical gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - INTERCO_INTERFACE: 192.168.90.20
+
+--------------------------------
+
+- satellite - 3
+  - SAT_INTERFACE: 192.168.10.10
 
 --------------------------------
 
@@ -49,6 +42,13 @@
   - SAT_INTERFACE: 192.168.10.27
   - INTERCO_INTERFACE: 192.168.90.27
   - LAN_INTERFACE: 192.168.30.20
+
+--------------------------------
+
+- split satellite network access gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.22
+  - INTERCO_INTERFACE: 192.168.90.22
+  - LAN_INTERFACE: 192.168.20.20
 
 --------------------------------
 
