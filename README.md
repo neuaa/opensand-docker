@@ -59,10 +59,23 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
         
         - using the GUI interface (the simulation must be previously stopped)
         OR
-        - using the following command : sudo ./opensand-docker --simulation-change -id ${simulation_id} -d 150 -fbw 100
-        This command will set the delay to 150ms (by default 125ms) and the forward bandwidth to 100MHz (by default 50MHz)
+        - using the CLI
         
-**Current simulation OpenSAND entities are listed with the following command :**
+        sudo ./opensand-docker --simulation-change -id ${simulation_id} -gw 1 -spot 1 -fbw 100
+        This command will set the forward bandwidth to 100MHz for the GW 1 in the spot 1 (by default 50MHz)
+     
+        sudo ./opensand-docker --simulation-change -id ${simulation_id} -d 100.
+        This command will set the delay to 100 ms (by default 125 ms)
+        
+
+**By default, Satellite Terminals does have Internet Access through their docker local network. If you want to use the Emulation network for Satellite Terminals, execute the following command while simulation is running :
+
+                
+         sudo ./opensand-docker --simulation-change --internet-access yes
+         
+ This command set default route to the OpenSAND GW associated to each Satellite Terminal.
+ 
+ **Current simulation OpenSAND entities are listed with the following command :**
          
          sudo ./opensand-docker --list-simulation
 
