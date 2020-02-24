@@ -1,6 +1,7 @@
 #!/bin/bash
 
 docker build -t opensand-daemon $PWD/Dockerfiles/opensand-daemon/.
+#docker build -t opensand-daemon-st $PWD/Dockerfile/opensand-daemon-st/.
 docker build -t opensand-collector $PWD/Dockerfiles/opensand-collector/.
 docker build -t opensand-ws $PWD/Dockerfiles/opensand-ws/.
 docker build -t opensand-http-server $PWD/Dockerfiles/opensand-http-server/.

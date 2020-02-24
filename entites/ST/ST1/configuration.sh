@@ -29,4 +29,4 @@ docker create -it --privileged -v $PWD/entites/ST/ST1/daemonbck${simulation_id}.
 docker network connect --ip $st_lan_addr --ip6 ${st_lan_ipv6_addr} lan-st1-${simulation_id} st1-${simulation_id}
 docker start st1-${simulation_id}
 docker exec st1-${simulation_id} "/start-daemon.sh"
-
+ 
