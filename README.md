@@ -85,6 +85,8 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
 
         sudo docker ps 
         
+![docker ps](https://zupimages.net/up/20/09/nmen.png)
+        
 **Access to a running client with following command**
  
         sudo docker exec -it ws-$LAN_GW-$client_id-$simulation_id (use docker ps command to know exactly the name of your clients containers)
