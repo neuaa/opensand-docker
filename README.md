@@ -6,6 +6,8 @@ As the name of the projet suggests, it uses OpenSAND, an open source emulator de
 
 The orchestrator can be seen as a GUI server who communicates with running containers. Both run on local machine. Container are OpenSAND entites(collector, gateway, satellite terminals) or independant workstations (or server).
 
+![architecture-globale](https://zupimages.net/up/20/09/ax2d.png)
+
 Here are the requirements for using the orchestrator and starting containers :
 
         - ubuntu 16.04 or 18.04 (I personnaly advice using ubuntu 16.04). As OpenSAND can configure your local network configuration, using a virtual machine is preferred.
