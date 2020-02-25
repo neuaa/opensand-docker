@@ -31,7 +31,7 @@ Here are some commands to deploy the architecture :
   
     sudo ./opensand-docker --simulate
     
-    ![simple architecture](https://zupimages.net/up/20/09/3d7j.png)
+ ![simple architecture](https://zupimages.net/up/20/09/3d7j.png)
   
 **Deploy a more detailed architecture**, here with 1 gateway, 3 satellite terminals and 2 clients in each local network
   
