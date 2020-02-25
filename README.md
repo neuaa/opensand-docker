@@ -37,7 +37,6 @@ Here are some commands to deploy the architecture :
   
     sudo ./opensand-docker --simulate -i 2 -gw 1 -st 3 -c 2 
     
-![full-architecture](https://zupimages.net/up/20/09/vs8j.png)
   
 **More generally :**
 
@@ -50,6 +49,11 @@ Here are some commands to deploy the architecture :
     - more than 5 satellite terminals
     
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.  
+ 
+ Here is an exemple of deployement of a "full architecture". Note that many control packets are exchanged and sometimes lead to losts<;
+ 
+ ![full-architecture](https://zupimages.net/up/20/09/vs8j.png)
+
     
 OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for physical aspect and a related gateway for network access (For more details : https://wiki.net4sat.org/doku.php?id=opensand:emulated_satcom_features:system:split_gateway:index). **To Deploy a split gateway, just replace -gw by -sgw (you can still deploy until 2 split gateways)**
 
@@ -57,7 +61,7 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
 
         sudo sand-manager -i
         
- The orchestrator automatically launch sand-manager but there could be some problems with the GUI part. In case of problem, remove the GUI, kill the sand-manager (pkill sand-manager) process and re-try the sand-manager -i command.
+ The orchestrator automatically launch sand-manager but there could be some problems with the GUI part. A timer expires when the architecture is wide. In case of problem, remove the current GUI, kill the sand-manager (pkill sand-manager) process and re-try the sand-manager -i command.
 
 **While simulation running, you can modify some parameters by**
         
