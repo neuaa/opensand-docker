@@ -7,4 +7,5 @@ cp /etc/opensand/daemonbck.conf /etc/opensand/daemon.conf
 sysctl -w net.ipv4.ip_forward=1
 sysctl -w net.ipv6.conf.all.forwarding=1
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 sand-daemon -f

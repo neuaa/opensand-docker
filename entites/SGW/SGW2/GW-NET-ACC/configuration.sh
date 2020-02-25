@@ -3,7 +3,7 @@
 simulation_id=$1
 sgw_sat_addr=192.168.1${simulation_id}.27
 sgw_interco_addr=192.168.9${simulation_id}.27
-sgw_lan_addr=192.168.3${simulation_id}.20
+sgw_lan_addr=192.168.3${simulation_id}.30
 sgw_lan_ipv6_addr=2001:660:6602:01${simulation_id}3::2
 
 sudo cp $PWD/entites/SGW/SGW2/GW-NET-ACC/daemonbck.conf $PWD/entites/SGW/SGW2/GW-NET-ACC/daemonbck${simulation_id}.conf

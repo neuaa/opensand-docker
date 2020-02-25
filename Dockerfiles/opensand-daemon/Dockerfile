@@ -10,3 +10,4 @@ RUN apt-get install -y netcat
 RUN apt-get install -y software-properties-common
 COPY start-daemon.sh /start-daemon.sh 
 RUN chmod +x /start-daemon.sh
+RUN apt-get install -y iperf3

@@ -2,7 +2,7 @@
 
 simulation_id=$1
 gw_sat_addr=192.168.1${simulation_id}.25
-gw_lan_addr=192.168.3${simulation_id}.20
+gw_lan_addr=192.168.3${simulation_id}.30
 gw_lan_ipv6_addr=2001:660:6602:01${simulation_id}3::2
 
 sudo cp $PWD/entites/GW/GW2/daemonbck.conf $PWD/entites/GW/GW2/daemonbck${simulation_id}.conf

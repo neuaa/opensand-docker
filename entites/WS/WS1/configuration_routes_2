@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ip r del default
+ip r add default via 192.168.22.20

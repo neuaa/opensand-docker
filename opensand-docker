@@ -56,7 +56,7 @@ elif [ "$command" = "--simulate" ]; then
 		elif [[ $name_parameter = "-sgw" || $name_parameter = "--split-gateway" ]] ; then
 				nb_sgw=$value_parameter
                			nb_gw=0 
-		elif [[ $name_parameter = "-s" || $name_parameter = "--services" ]] ; then
+		elif [[ $name_parameter = "-s" || $name_parameter = "--server" ]] ; then
 				nb_servers=$value_parameter
 
                 elif [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
@@ -243,24 +243,24 @@ elif [ "$command" = "--simulation-change" ]; then
 		sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
 	
 		# we need all entities to be stopped in order to modify parameters
-		daemon_running=0
-		while [[ $daemon_running -gt 0 ]]; do
+		daemon_running=$((1+$created_gw+$created_sgw+$created_st))
+		while [ "$daemon_running" -gt 0 ]; do
 			daemon_running=0
 			for ((i=1;i<=$created_gw;i+=1)); do
-					calcul=$(docker exec -it gw${i}-${simulation_id} ps -ef |grep opensand |wc -l)
+					calcul=$(docker exec -it gw${i}-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
 					daemon_running=$((daemon_running+calcul))
 			done
 			for ((i=1;i<=$created_sgw;i+=1)); do
-					calcul=$(docker exec -it sgw${i}-phy-${simulation_id} ps -ef |grep opensand |wc -l)
+					calcul=$(docker exec -it sgw${i}-phy-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
 					daemon_running=$((daemon_running+calcul))
-					calcul=$(calcul + docker exec -it sgw${i}-net-acc-${simulation_id} ps -ef |grep opensand |wc -l)
+					calcul=$(calcul + docker exec -it sgw${i}-net-acc-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
                                 	daemon_running=$((daemon_running+calcul))
 			done
         	        for ((i=1;i<=$created_st;i+=1)); do
-					calcul=$(docker exec -it st${i}-${simulation_id} ps -ef |grep opensand |wc -l)
+					calcul=$(docker exec -it st${i}-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
                         	        daemon_running=$((daemon_running+calcul))
 			done
-				        calcul=$(docker exec -it sat-${simulation_id} ps -ef |grep opensand |wc -l)
+				        calcul=$(docker exec -it sat-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
 					daemon_running=$((daemon_running+calcul))
 		done
 	
@@ -286,33 +286,33 @@ elif [ "$command" = "--simulation-change" ]; then
 	
 		# Waiting for all entities to restart ...
 		daemon_wished=$((1+$created_gw+$created_sgw+$created_st))
-       		echo "$daemon_wished"
 		daemon_running=0
-	        while [[ $daemon_running -ne $daemon_whished ]]; do
-	                daemon_running=0
-	                for ((i=1;i<=$created_gw;i+=1)); do
-	                                calcul=$(docker exec -it gw${i}-${simulation_id} ps -ef |grep opensand |wc -l)
-	                                daemon_running=$((daemon_running+calcul))
-	                done
-	                for ((i=1;i<=$created_sgw;i+=1)); do
-	                                calcul=$(docker exec -it sgw${i}-phy-${simulation_id} ps -ef |grep opensand |wc -l)
-					daemon_running=$((daemon_running+calcul))
-	                                calcul=$(docker exec -it sgw${i}-net-acc-${simulation_id} ps -ef |grep opensand |wc -l)
-	                                daemon_running=$((daemon_running+calcul)) 
-			done
-	                for ((i=1;i<=$created_st;i+=1)); do
-	                                calcul=$(docker exec -it st${i}-${simulation_id} ps -ef |grep opensand |wc -l)
-	                                daemon_running=$((daemon_running+calcul))
-	                done
-	                                calcul=$(docker exec -it sat-${simulation_id} ps -ef |grep opensand |wc -l)
-	                                daemon_running=$((daemon_running+calcul))
-	        done
-	
-		sleep 1
+		
+		while [  $daemon_running -ne $daemon_wished ];do
+			daemon_running=0
+			for ((i=1;i<=$created_gw;i+=1)); do
+                                        calcul=$(docker exec -it gw${i}-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
+                                        daemon_running=$((daemon_running+calcul))
+                        done
+                        for ((i=1;i<=$created_sgw;i+=1)); do
+                                        calcul=$(docker exec -it sgw${i}-phy-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
+                                       	daemon_running=$((daemon_running+calcul))
+                                        calcul=$(docker exec -it sgw${i}-net-acc-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
+                                        daemon_running=$((daemon_running+calcul))
+                       done
+                        for ((i=1;i<=$created_st;i+=1)); do
+                                        calcul=$(docker exec -it st${i}-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
+                                        daemon_running=$((daemon_running+calcul))
+                        done
+
+	                calcul=$(docker exec -it sat-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
+	                daemon_running=$((daemon_running+calcul))
+			echo "$daemon_running"
+		done
 
 		sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
-	fi
+	fi	
 	
 # remove the current architecture
 elif [ "$command" = "--destroy" ]; then
