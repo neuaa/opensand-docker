@@ -7,6 +7,11 @@ addr_ipv4=192.168.5${simulation_id}.${last_byte}
 addr_ipv6=2001:660:6602:01${simulation_id}5::${last_byte}
 addr_gateway=192.168.5${simulation_id}.50
 
+echo >> $PWD/output
+echo "--------------------------------" >> $PWD/output
+echo >> $PWD/output
+echo "- client LAN ST 2" >> $PWD/output
+echo "  - LAN_INTERFACE: ${addr_ipv4}" >> $PWD/output
 
 
 sudo cp $PWD/entites/WS/configuration_routes.sh $PWD/entites/WS/WS4/configuration_routes_${simulation_id}

@@ -15,7 +15,6 @@ elif [ "$command" = "--simulate" ]; then
 	fbw=50
 	rbw=20
 	ns=1
-	sat_mode="transparent"	
 	nb_gw=1
 	nb_sgw=0
 	nb_clients=1
@@ -188,14 +187,12 @@ elif [ "$command" = "--simulation-change" ]; then
 	simulation_id=0
 	delay_to_change=0	
 	fbw_to_change=0
-	sat_mode="transparent"
+	mode_to_change=0
 
 	created_gw=$(docker ps |grep opensand-daemon |grep gw |wc -l)
 	created_sgw=$(docker ps|grep opensand-daemon|grep sgw |wc -l)
 	created_st=$(docker ps|grep opensand-daemon|grep st |wc -l)
 
-	echo $2	
-		
         nb_parameters=($#-1)
         for ((i=2;i<=$nb_parameters;i+=2)); do
 
@@ -227,7 +224,11 @@ elif [ "$command" = "--simulation-change" ]; then
                                 spot_id=$value_parameter
 
 
-                elif [[ $name_parameter = "--internet-access" ]]; then
+                elif [[ $name_parameter = "--change-mode" ]]; then
+                                mode_to_change=1
+				sat_mode=$value_parameter
+                
+		elif [[ $name_parameter = "--internet-access" ]]; then
                                 if [[ $value_parameter = "yes" ]]; then
 					sudo ./internet_access/internet_access.sh ${simulation_id}
 				fi	
@@ -237,7 +238,7 @@ elif [ "$command" = "--simulation-change" ]; then
 	
 	#connect to the manager in order to stop the running simulation and modify parameters
 	
-	if [[ $delay_to_change = 1 ]] || [[ $fbw_to_change = 1 ]]; then
+	if [ $delay_to_change = 1 ] || [ $mode_to_change = 1 ] ; then
 	
 		manager_ip_address=192.168.1${simulation_id}.1	
 		sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
@@ -279,6 +280,26 @@ elif [ "$command" = "--simulation-change" ]; then
 			n_line=$(cat /root/.opensand/default/core_global.conf |grep -n "<bandwidth*" |awk '{print $1}' FS=":" |head -n $k |tail -n 1)
 			sudo sed -i ''${n_line}'s/<bandwidth>.*<\/bandwidth>/<bandwidth>'${fbw}'<\/bandwidth>/' /root/.opensand/default/core_global.conf
 		fi
+
+                if [[ $mode_to_change = 1 ]]; then
+
+			echo "on change le modeeeeeeeeeeeeeeeeee"
+			echo "$sat_mode"
+                        
+			if [[ "$sat_mode" -eq "transparent" ]]; then
+				echo "on est en transparent"
+                                sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>transparent<\/satellite_type>/g' /root/.opensand/default/core_global.conf
+                                sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="GSE"\/>/g' /root/.opensand/default/core_global.conf
+
+
+
+                        elif [[ "$sat_mode" -eq "regenerative" ]]; then
+				echo "on est en regenerative"
+				sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>regenerative<\/satellite_type>/g' /root/.opensand/default/core_global.conf
+                                sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="RLE"\/>/g' /root/.opensand/default/core_global.conf
+
+                        fi
+                fi
  
 
 		# Restarting the simulation

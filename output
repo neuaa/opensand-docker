@@ -11,19 +11,18 @@
 
 --------------------------------
 
-- server
+- server LAN GW1 
   - LAN_INTERFACE: 192.168.20.101
+
+--------------------------------
+
+- client LAN ST 1
+  - LAN_INTERFACE: 192.168.40.101
 
 --------------------------------
 
 - satellite - 3
   - SAT_INTERFACE: 192.168.10.10
-
---------------------------------
-
-- satellite gateway 1 - 4
-  - SAT_INTERFACE: 192.168.10.20
-  - LAN_INTERFACE: 192.168.20.20
 
 --------------------------------
 
@@ -33,6 +32,6 @@
 
 --------------------------------
 
-- satellite terminal 2 - 7
-  - SAT_INTERFACE: 192.168.10.50
-  - LAN_INTERFACE: 192.168.50.50
+- satellite gateway 1 - 4
+  - SAT_INTERFACE: 192.168.10.20
+  - LAN_INTERFACE: 192.168.20.20
