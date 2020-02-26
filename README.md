@@ -6,6 +6,10 @@ As the name of the projet suggests, it uses OpenSAND, an open source emulator de
 
 The orchestrator can be seen as a GUI server who communicates with running containers. Both run on local machine. Container are OpenSAND entites(collector, gateway, satellite terminals) or independant workstations (or server).
 
+Here is an exemple of architecture locally deployed. Note that two kind of gateways exists : a classic GW (here GW0), and a split GW (divided into GW-PHY and GW-NET-ACC components). 
+
+![architecture-globale](https://zupimages.net/up/20/09/ax2d.png)
+
 Here are the requirements for using the orchestrator and starting containers :
 
         - ubuntu 16.04 or 18.04 (I personnaly advice using ubuntu 16.04). As OpenSAND can configure your local network configuration, using a virtual machine is preferred.
@@ -30,10 +34,13 @@ Here are some commands to deploy the architecture :
  The simple architecture includes a collector, a satellite, a satellite terminal and a client in each local network in each terrestrial entity (GW and ST)
   
     sudo ./opensand-docker --simulate
+    
+ ![simple architecture](https://zupimages.net/up/20/09/3d7j.png)
   
 **Deploy a more detailed architecture**, here with 1 gateway, 3 satellite terminals and 2 clients in each local network
   
     sudo ./opensand-docker --simulate -i 2 -gw 1 -st 3 -c 2 
+    
   
 **More generally :**
 
@@ -46,6 +53,11 @@ Here are some commands to deploy the architecture :
     - more than 5 satellite terminals
     
     - the "simulation_id" must be between 0 and 9 included and define ip adresses of the architecture.  
+ 
+ Here is an exemple of deployement of a "full architecture". Note that many control packets are exchanged and sometimes lead to losts<;
+ 
+ ![full-architecture](https://zupimages.net/up/20/09/vs8j.png)
+
     
 OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for physical aspect and a related gateway for network access (For more details : https://wiki.net4sat.org/doku.php?id=opensand:emulated_satcom_features:system:split_gateway:index). **To Deploy a split gateway, just replace -gw by -sgw (you can still deploy until 2 split gateways)**
 
@@ -53,7 +65,7 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
 
         sudo sand-manager -i
         
- The orchestrator automatically launch sand-manager but there could be some problems with the GUI part. In case of problem, remove the GUI, kill the sand-manager (pkill sand-manager) process and re-try the sand-manager -i command.
+ The orchestrator automatically launch sand-manager but there could be some problems with the GUI part. A timer expires when the architecture is wide. In case of problem, remove the current GUI, kill the sand-manager (pkill sand-manager) process and re-try the sand-manager -i command.
 
 **While simulation running, you can modify some parameters by**
         
@@ -82,6 +94,8 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
 **Running containers are listed with :**
 
         sudo docker ps 
+        
+![docker ps](https://zupimages.net/up/20/09/nmen.png)
         
 **Access to a running client with following command**
  
