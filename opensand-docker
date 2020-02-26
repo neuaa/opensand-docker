@@ -185,14 +185,19 @@ elif [ "$command" = "--simulation-change" ]; then
 
         #default parameters if not precised by user
 	simulation_id=0
+	parameter_to_change=0
 	delay_to_change=0	
 	fbw_to_change=0
+	rbw_to_change=0
 	mode_to_change=0
 
 	created_gw=$(docker ps |grep opensand-daemon |grep gw |wc -l)
 	created_sgw=$(docker ps|grep opensand-daemon|grep sgw |wc -l)
 	created_st=$(docker ps|grep opensand-daemon|grep st |wc -l)
-
+	nb_spot=$(cat $HOME/.opensand/default/core_global.conf |grep -n "<spot" |wc -l)
+	nb_spot=$((nb_spot / 2))
+	nb_spot=$((nb_spot / created_gw))
+	echo "il y a $nb_spot spots"
         nb_parameters=($#-1)
         for ((i=2;i<=$nb_parameters;i+=2)); do
 
@@ -210,21 +215,26 @@ elif [ "$command" = "--simulation-change" ]; then
 				gw_id=$value_parameter	
 		
                 elif [[ $name_parameter = "-d" || $name_parameter = "--delay" ]]; then
-                                delay_to_change=1
+                                parameter_to_change=1
+				delay_to_change=1
 				delay=$value_parameter
 
                 elif [[ $name_parameter = "-fbw" || $name_parameter = "--forward-bandwidth" ]]; then
+                                parameter_to_change=1
                                 fbw_to_change=1
 				fbw=$value_parameter
 
                 elif [[ $name_parameter = "-rbw" || $name_parameter = "--return-bandwidth" ]]; then
-                                rbw=$value_parameter
+                                parameter_to_change=1
+				rbw_to_change=1
+				rbw=$value_parameter
 
                 elif [[ $name_parameter = "-spot" || $name_parameter = "--number-spot" ]]; then
                                 spot_id=$value_parameter
 
 
                 elif [[ $name_parameter = "--change-mode" ]]; then
+                                parameter_to_change=1
                                 mode_to_change=1
 				sat_mode=$value_parameter
                 
@@ -238,7 +248,7 @@ elif [ "$command" = "--simulation-change" ]; then
 	
 	#connect to the manager in order to stop the running simulation and modify parameters
 	
-	if [ $delay_to_change = 1 ] || [ $mode_to_change = 1 ] ; then
+	if [ $parameter_to_change = 1 ] ; then
 	
 		manager_ip_address=192.168.1${simulation_id}.1	
 		sudo nc ${manager_ip_address} 5656 < ./nc_commands/stop.txt
@@ -271,28 +281,49 @@ elif [ "$command" = "--simulation-change" ]; then
 	
 		# Change of the delay
 		if [[ $delay_to_change = 1 ]]; then
-			sudo sed -i 's+<delay>.*</delay>+<delay>'${delay}'</delay>+g' /root/.opensand/default/core_global.conf
+			sudo sed -i 's+<delay>.*</delay>+<delay>'${delay}'</delay>+g' $HOME/.opensand/default/core_global.conf
 		fi
 		
-		# Change the bandwidth
+		# Change the forward bandwidth
 		if [[ $fbw_to_change = 1 ]]; then
-			k=$((spot_id*gw_id))
-			n_line=$(cat /root/.opensand/default/core_global.conf |grep -n "<bandwidth*" |awk '{print $1}' FS=":" |head -n $k |tail -n 1)
-			sudo sed -i ''${n_line}'s/<bandwidth>.*<\/bandwidth>/<bandwidth>'${fbw}'<\/bandwidth>/' /root/.opensand/default/core_global.conf
+		
+			if [[ $gw_id = 1 ]]; then
+				k=$((spot_id))
+				
+
+			elif [[ $gw_id = 2 ]]; then
+				k=$((nb_spot+spot_id))	#nb_spot+
+			fi
+		
+			n_line=$(cat $HOME/.opensand/default/core_global.conf |grep -n "<bandwidth*" |awk '{print $1}' FS=":" |head -n $k |tail -n 1)
+			sudo sed -i ''${n_line}'s/<bandwidth>.*<\/bandwidth>/<bandwidth>'${fbw}'<\/bandwidth>/' $HOME/.opensand/default/core_global.conf
 		fi
 
+                # Change the return bandwidth
+                if [ $rbw_to_change = 1 ]; then
+	
+			if [ $gw_id = 1 ]; then
+				k=$((nb_spot+spot_id))
+			
+			elif [ $gw_id = 2 ]; then
+                        	k=$((2*nb_spot+2*spot_id))
+			fi
+                        n_line=$(cat $HOME/.opensand/default/core_global.conf |grep -n "<bandwidth*" |awk '{print $1}' FS=":" |head -n $k |tail -n 1)
+                        sudo sed -i ''${n_line}'s/<bandwidth>.*<\/bandwidth>/<bandwidth>'${fbw}'<\/bandwidth>/' $HOME/.opensand/default/core_global.conf
+		fi
+	
                 if [[ $mode_to_change = 1 ]]; then
 
                         
 			if [ "$sat_mode" = "transparent" ]; then
-                                sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>transparent<\/satellite_type>/g' /root/.opensand/default/core_global.conf
-                                sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="GSE"\/>/g' /root/.opensand/default/core_global.conf
+                                sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>transparent<\/satellite_type>/g' $HOME/.opensand/default/core_global.conf
+                                sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="GSE"\/>/g' $HOME/.opensand/default/core_global.conf
 
 
 
                         elif [ "$sat_mode" = "regenerative" ]; then
-				sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>regenerative<\/satellite_type>/g' /root/.opensand/default/core_global.conf
-                                sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="RLE"\/>/g' /root/.opensand/default/core_global.conf
+				sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>regenerative<\/satellite_type>/g' $HOME/.opensand/default/core_global.conf
+                                sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="RLE"\/>/g' $HOME/.opensand/default/core_global.conf
 
                         fi
                 fi
