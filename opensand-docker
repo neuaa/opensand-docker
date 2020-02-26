@@ -197,7 +197,6 @@ elif [ "$command" = "--simulation-change" ]; then
 	nb_spot=$(cat $HOME/.opensand/default/core_global.conf |grep -n "<spot" |wc -l)
 	nb_spot=$((nb_spot / 2))
 	nb_spot=$((nb_spot / created_gw))
-	echo "il y a $nb_spot spots"
         nb_parameters=($#-1)
         for ((i=2;i<=$nb_parameters;i+=2)); do
 
