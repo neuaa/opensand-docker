@@ -286,14 +286,14 @@ elif [ "$command" = "--simulation-change" ]; then
 			echo "on change le modeeeeeeeeeeeeeeeeee"
 			echo "$sat_mode"
                         
-			if [[ "$sat_mode" -eq "transparent" ]]; then
+			if [ "$sat_mode" = "transparent" ]; then
 				echo "on est en transparent"
                                 sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>transparent<\/satellite_type>/g' /root/.opensand/default/core_global.conf
                                 sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="GSE"\/>/g' /root/.opensand/default/core_global.conf
 
 
 
-                        elif [[ "$sat_mode" -eq "regenerative" ]]; then
+                        elif [ "$sat_mode" = "regenerative" ]; then
 				echo "on est en regenerative"
 				sudo sed -i 's/<satellite_type>.*<\/satellite_type>/<satellite_type>regenerative<\/satellite_type>/g' /root/.opensand/default/core_global.conf
                                 sudo sed -i '21s/<encap_scheme pos="0".*/<encap_scheme pos="0" encap="RLE"\/>/g' /root/.opensand/default/core_global.conf
