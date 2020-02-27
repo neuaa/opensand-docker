@@ -26,3 +26,4 @@ sudo sed -i 's+$addr_gateway+'${addr_gateway}'+g' $PWD/entites/WS/WS1/configurat
 docker create -it --net lan-gw1-${simulation_id} --ip $addr_ipv4 --ip6 $addr_ipv6 --privileged --hostname server-gw1-${index_workstation}-${simulation_id} --name server-gw1-${index_workstation}-${simulation_id} -v $PWD/entites/WS/WS1/configuration_routes_${simulation_id}:/configuration_routes opensand-server
 docker start server-gw1-${index_workstation}-${simulation_id}
 docker exec server-gw1-${index_workstation}-${simulation_id} "/configuration_routes"
+docker exec server-gw1-${index_workstation}-${simulation_id} "/start-server.sh"
