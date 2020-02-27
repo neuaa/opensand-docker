@@ -67,11 +67,6 @@ elif [ "$command" = "--simulate" ]; then
 		elif [[ $name_parameter = "-rbw" || $name_parameter = "--return-bandwidth" ]]; then
 				rbw=$value_paramter
                 
-		elif [[ $name_parameter = "-ns" || $name_parameter = "--number-spot" ]]; then
-				ns=$value_parameter
-
-#		 elif [[ $name_parameter = "-mode" || $name_parameter = "--satellite-mode" ]]; then
-#                                sat_mode=$value_parameter
 
 
                 # a parameter / an entity not existing. please refer to the help with the following command : opensand-docker -h
@@ -178,7 +173,7 @@ elif [ "$command" = "--simulate" ]; then
 
 # current simulation
 elif [ "$command" = "--list-simulation" ]; then
-	cat ./output
+	cat $PWD/output
 
 #changing simulation parameters
 elif [ "$command" = "--simulation-change" ]; then
@@ -241,7 +236,14 @@ elif [ "$command" = "--simulation-change" ]; then
                                 if [[ $value_parameter = "yes" ]]; then
 					sudo ./internet_access/internet_access.sh ${simulation_id}
 				fi	
-		fi
+		
+
+                # a parameter / an entity not existing. please refer to the help with the following command : opensand-docker -h
+                else
+                        echo Parameter does not exist
+                        exit
+                fi
+
 		            
 	done
 	
@@ -279,7 +281,7 @@ elif [ "$command" = "--simulation-change" ]; then
 #		sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 	
 	
-		# Change of the delay
+		# Change the delay
 		if [[ $delay_to_change = 1 ]]; then
 			sudo sed -i 's+<delay>.*</delay>+<delay>'${delay}'</delay>+g' $HOME/.opensand/default/core_global.conf
 		
@@ -327,7 +329,7 @@ elif [ "$command" = "--simulation-change" ]; then
 
 			sudo sed -i ''${n_line_2_2}'s/<up_carriers .*/<up_carriers access_type="DAMA" category="Premium" ratio="10" symbol_rate="'${calcul}'E6" fmt_group="1"\/>/' $HOME/.opensand/default/core_global.conf
 
-	
+		# change the mode
                 elif [[ $mode_to_change = 1 ]]; then
 
                         
@@ -359,7 +361,6 @@ elif [ "$command" = "--simulation-change" ]; then
                         calcul_sgw1=0
                         calcul_sgw2=0
                         calcul_st=0
-			echo "on est iciiiiiiiiiiiiii"
                         for ((i=1;i<=$created_gw;i+=1)); do
                                         calcul_gw=$(( calcul_gw + $(docker exec -it gw${i}-${simulation_id} ps -ef |grep 192.168.10 |wc -l)))
                         done
@@ -375,7 +376,7 @@ elif [ "$command" = "--simulation-change" ]; then
 			echo "start : $daemon_running"
                 done
 
-		#sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
+		sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
 
 	fi	
 	
