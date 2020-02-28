@@ -18,6 +18,8 @@ Here are the requirements for using the orchestrator and starting containers :
         
         - opensand and opensand-manager packages (please refer to the official documentation https://opensand.org/content/get.php). Opensand-Manager will be required in order to start the emulation.
         
+        - xmlstarlet package (used for parsing XML configuration files)
+        
         - Make sure 192.168.{1..9}y.0/24 addresses are free on your workstation. Those adresses will be used by Docker for the emulation network.
         
         - First launching could be a little long (a few minutes) as you need to build opensand images.
@@ -73,12 +75,17 @@ OpenSAND offers the possibility to deploy a "split-gateway" : a gateway for phys
         OR
         - using the CLI
         
-        sudo ./opensand-docker --simulation-change -id ${simulation_id} -gw 1 -spot 1 -fbw 100
-        This command will set the forward bandwidth to 100MHz for the GW 1 in the spot 1 (by default 50MHz)
+        sudo ./opensand-docker --simulation-change -id ${simulation_id} -gw 0 -spot 1 -fbw 100
+        This command will set the forward bandwidth to 100MHz for the GW 0 in the spot 1 (by default 50MHz)
      
         sudo ./opensand-docker --simulation-change -id ${simulation_id} -d 100.
         This command will set the delay to 100 ms (by default 125 ms)
         
+        sudo ./opensand-docker --simulation-change -id ${simulation_id} --change-mode regenerative
+        This command will change the communication mode (from transparent by default to regenerative)
+        
+        sudo ./opensand-docker --simulation-change -id ${simulation_id} --internet-access yes
+        This command will allow workstations (clients and server) to have an access to the Internet through GW0 (docker called container gw1-{simulation_id}).
 
 **By default, Satellite Terminals does have Internet Access through their docker local network. If you want to use the Emulation network for Satellite Terminals, execute the following command while simulation is running :
 
