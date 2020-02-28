@@ -8,7 +8,7 @@ st_lan_ipv6_addr=2001:660:6602:01${simulation_id}8::2
 sudo cp $PWD/entites/ST/ST5/daemonbck.conf $PWD/entites/ST/ST5/daemonbck${simulation_id}.conf
 
 
-sudo sed -i 's+$emu_ipv4+'${st_sat_addr}'/24+g' /home/neuaa/ProjetLong/simulation/opensand-docker/entites/ST/ST5/daemonbck${simulation_id}.conf
+sudo sed -i 's+$emu_ipv4+'${st_sat_addr}'/24+g' $PWD/entites/ST/ST5/daemonbck${simulation_id}.conf
 
 sudo sed -i 's+$lan_ipv4+'${st_lan_addr}'/24+g' $PWD/entites/ST/ST5/daemonbck${simulation_id}.conf
 
