@@ -20,7 +20,6 @@ elif [ "$command" = "--simulate" ]; then
 	nb_clients=1
 	nb_servers=1
 	nb_st=1
-	service="http"
 	value_parameter=0
 
         #number of parameters given when launching the orchestrator     
@@ -274,7 +273,6 @@ elif [ "$command" = "--simulation-change" ]; then
 			done
 			calcul_sat=$(docker exec -it sat-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
 			daemon_running=$((calcul_gw+calcul_sgw1+calcul_sgw2+calcul_st+calcul_sat))
-			echo "stop : $daemon_running"
 		done
 	
 		# Now entities are stopped, we can change parameters
@@ -372,7 +370,6 @@ elif [ "$command" = "--simulation-change" ]; then
                         done
                         calcul_sat=$(docker exec -it sat-${simulation_id} ps -ef |grep 192.168.10 |wc -l)
                         daemon_running=$((calcul_gw+calcul_sgw1+calcul_sgw2+calcul_st+calcul_sat))
-			echo "start : $daemon_running"
                 done
 
 		sudo nc ${manager_ip_address} 5656 < ./nc_commands/exit.txt
@@ -381,16 +378,21 @@ elif [ "$command" = "--simulation-change" ]; then
 	
 # remove the current architecture
 elif [ "$command" = "--destroy" ]; then
-	sudo docker stop $(docker ps -aq)
-	sudo docker rm $(docker ps -aq)
-	pgrep avahi| xargs kill
 	simulation_id=0
         nb_parameters=($#-1)
 	if [[ $nb_parameters -gt 0 ]]; then
-		simulation_id=$3
+		if [[ "$2" = "-i" ]]; then
+			simulation_id=$3
+		else 
+			echo ID simulation not found
+			exit
+		fi
 	fi
+	sudo docker stop $(docker ps -aq)
+	sudo docker rm $(docker ps -aq)
+	pgrep avahi| xargs kill
 	sudo ./docker-networks/docker-network-destroy ${simulation_id}
-	echo > output
+	echo > ./output
 
 
 else
