@@ -117,5 +117,6 @@ Note that default route is configured as its associated LAN_GW.
     
  **A recommended practice is to exit the manager GUI after deleting the architecture**
     
+ for more details : please contact me @ martin.frisch@hotmail.fr
    
   
